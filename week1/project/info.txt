@@ -1,0 +1,5 @@
+Specs: Make a visual clone of YouTubeLinks to an external site. while viewed in incognito mode, logged out, on an iPhone SE.
+
+Note: The "links" don't have to actually function; the website just has to visually appear to be identical.
+
+Bonus: Up to 3 possible bonus points for making the website responsive. (mark on the submission that you made it responsive)
