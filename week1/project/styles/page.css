@@ -3,31 +3,28 @@
     font-family: 'Roboto', Arial;
     margin: 0;
     padding: 0;
-   
-    /* max-width: 500px; */
-    /* background-color: #f9f9f9; */
 
 }
 /* main body */
 .main_body{
-    /* height: calc(100vh - 70px); */
-    /* display: flex; */
+
+    max-height: 100vh;
     background-color: #f9f9f9;
     overflow-y: scroll;
+    
 
 }
 /* shorts */
 #short_line {
     display: flex;
     align-items: center;
-    padding-left: 16px;
-    /* padding-top: 6px */
+    padding-left: 8px;
     background-color:#f9f9f9;
 }
 .shorts_logo {
-    width: 14px;
-    height: 14px;
-    margin-left: 40px;
+    width: 12px;
+    height: 12px;
+    margin-left: 35px;
     margin-right: 2px;
 }
 

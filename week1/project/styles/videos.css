@@ -53,7 +53,7 @@
 
 .video_info{
   display: inline-block;
-  width: 100px;
+  width: 130px;
 }
 
 .video_title{
@@ -73,6 +73,10 @@
   font-size: 5px;
   margin: 0 0 2px 0;
 
+}
+
+.video_meta {
+  width: 100%;
 }
 
 .video_stats{
@@ -97,12 +101,6 @@
   bottom: 3px;
   right: 3px;
 }
-  /* @media (max-width: 667px) {
-    .video_section {
-      grid-template-columns: 1fr ;
-
-    }
-  } */
   
   .videos2 {
     display: flex;
