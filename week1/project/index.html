@@ -3,166 +3,423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type = "text/css" href="style.css">
+    
+    <!-- styles -->
+    <link rel="stylesheet"  href="styles/videos.css">
+    <link rel="stylesheet"  href="styles/navs.css">
+    <link rel="stylesheet"  href="styles/page.css">
+    <link rel="stylesheet"  href="styles/shorts.css">
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <title>MyTube</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- stylr for thumbnails -->
+    <style>
+
+    </style>
+
 </head>
 <body>
-    <!--top navbar section-->
-    <div id = "top_navbar">
-        <div id = "menu_toggle">
-            <i class ="material-symbols-outlined">menu</i>
+    <!-- nav bar top -->
+    <div id="nav_top">
+        <div class="left">
+            <img class="menu" src="assets/icons/menu.svg">
+            <img class="youtube_logo" src="assets/icons/yt.svg">
+            <div class="country">
+                <div class="country_code">DE</div>
+            </div>
         </div>
-        <div id = "logo">
-            <div class = "logo_icon"></div>
-            <img src="" alt="">
-            <div id = "logo_text">YouTube</div>
-            <div id = "logo_text2">DE</div>
+
+        <div class="center">
+            <form>
+                <input type="search" placeholder="Search">
+                <button type="submit">Search</button>
+            </form>
         </div>
-        <div id = "search_bar">
-            <input type="text" placeholder="Search">
-            <div id = "search_icon"></div>
-        </div>
-        <div id = "3dots">
-            <div class = "dot"></div>
-            <div class = "dot"></div>
-            <div class = "dot"></div>
-        </div>
-        <div id = "user_signin">
-            <div id = "user_icon"></div>
-            <div id = "user_name">Sign in</div>
-        </div>
+
+        <div class="right">
+            <img class="ellipsis" src="assets/icons/ellipsis.svg">
+            <a href="#" class="user_button">
+                <i class="material-symbols-outlined">account_circle</i>
+                <span>Sign in</span>	
+            </a>
+        </div>  
     </div>
-    <div id = "side_navbar">
-        <div id = "side_navbar_home">
-            <div id = "home_icon"></div>
-            <div id = "home_text">Home</div>
-        </div>
-        <div id = "side_navbar_shorts">
-            <div id = "shorts_icon1"></div>
-            <div id = "shorts_text">Trending</div>
-        </div>
-        <div id = "side_navbar_subscriptions">
-            <div id = "subscriptions_icon"></div>
-            <div id = "subscriptions_text">Subscriptions</div>
-        </div>
-        <div id = "side_navbar_library">
-            <div id = "library_icon"></div>
-            <div id = "library_text">Library</div>
-        </div>
-        <div id = "side_navbar_history">
-            <div id = "history_icon"></div>
-            <div id = "history_text">History</div>
-        </div>
-    </div>
+    <!-- option bar -->
     <div id = "options_navbar">
-        <div id = "all">
-            <div id = "all_text">All</div>
-        </div>
-        <div id = "news">
-            <div id = "news_text">News</div>
-        </div>
-        <div id = "music">
-            <div id = "music_text">Music</div>
-        </div>
-        <div id = "gaming">
-            <div id = "gaming_text">Gaming</div>
-        </div>
-        <div id = "live">
-            <div id = "live_text">Live</div>
-        </div>
-        <div id = "chill">
-            <div id = "chill_text">Chill-out music</div>
-        </div>
-        <div id = "improve">
-            <div id = "improve_text">Home improvement</div>
-        </div>
-        <div id = "ballon">
-            <div id = "ballon_text">Ballon d'Or</div>
-        </div>
-        <div id = "sports">
-            <div id = "sports_text">Sports cars</div>
-        </div>
 
+        <a href="#" class="options">
+            <span>All</span>	
+        </a>
+        <a href="#" class="options">
+            <span>News</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Music</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Gaming</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Live</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Chill-out music</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Home improvement</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Ballon d'Or</span>	
+        </a>
+        <a href="#" class="options">
+            <span>Sports</span>	
+        </a>
     </div>
-    <div id = "ad_banner">
-        <div class = "logo_icon"></div>
-        <div id = "ad_banner_text">YouTube Premium</div>
-        <div id = "ad_banner_text">What everything you love without ads</div>
-        <div id = "ad_banner_text">Get it now</div>
-        <div id = "ad_banner_img"></div>
-        <div id = "ad_banner_icon">(closing x)</div>
+    <!-- side bar -->
+    <div class="sidebar">
+        <div class="sidebar_link">
+          <img src="assets/icons/home.svg">
+          <div>Home</div>
+        </div>
+        <div class="sidebar_link">
+          <img src="assets/icons/shorts.svg">
+          <div>Shorts</div>
+        </div>
+        <div class="sidebar_link">
+          <img src="assets/icons/subs.svg">
+          <div>Subscriptions</div>
+        </div>
+        <div class="sidebar_link">
+          <img src="assets/icons/lib.svg">
+          <div>Library</div>
+        </div>
+        <div class="sidebar_link">
+          <img src="assets/icons/history.svg">
+          <div>History</div>
+        </div>
+    </div>
+    <!-- main body -->
+    <div class="main_body">
+        <!--  video preview -->
+        <div class="videos">
+            <!-- vid section -->
+            <div class="video_container">
+                <!-- vid cont -->
+                <div class="video_preview"> 
+                    <!-- vid thumb -->
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t1.webp">
+                        <div class="video_time">13:17</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c1.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                USA: Baby Boomer, obdachlos | ARTE Reportage
+                            </p>
+                            <p class="channel_name">
+                                ARTEde
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                255K views &#183; 1 day ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="video_preview">  
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t2.webp">
+                        <div class="video_time">48:40</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c2.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                Ashocking find in an ancint oak stump
+                            </p>
+                            <p class="channel_name">
+                                Belko Wood
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                3.5M views &#183; 3 days ago
+                            </p>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <div class="video_container">
+                <div class="video_preview"> 
+                    <!-- vid thumb -->
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t3.webp">
+                        <div class="video_time">24:21</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c3.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                Wie Islamisten den Nahost-Konflikt ausnutzen - und Hass in Deutschland schüren
+                            </p>
+                            <p class="channel_name">
+                                ZDFheute Nachrichten
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                536K views &#183; 4 days ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="video_preview"> 
+                    <!-- vid thumb -->
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t4.webp">
+                        <div class="video_time">1:15:29</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c4.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                20 WOMEN VS 1 SIDEMEN: SPEED EDITION
+                            </p>
+                            <p class="channel_name">
+                                Sidemen
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                37M views &#183; 4 weeks ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- shorts entry -->
+    <div id="short_line">
+        <img class="shorts_logo" src="assets/icons/shorts1.svg">
+        <p class="logo_title">Shorts</p>
+    </div>
+    <!-- shorts -->
+    <div class="shorts">
+        <!-- vid section -->
+        <div class="short_container">
+            <!-- vid cont -->
+            <div class="short_preview"> 
+                <!-- vid thumb -->
+                <div class="s_thumbnail_row">
+                    <img class="s_thumbnail" src="assets/thumbnails/s1.webp">
+                </div>
+                <!-- vid bottom -->
+                <div class="short_meta">
+                  <!-- vid details -->
+                    <div class="short_info">
+                        <p class="short_title">
+                            🤣🤣Funiest Moments in Women's Football #shorts
+                        </p>
+                        <!-- vid meta -->
+                        <p class="short_stats">
+                            4.1M views
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="short_container">  
+            <div class="short_preview"> 
+                <!-- vid thumb -->
+                <div class="s_thumbnail_row">
+                    <img class="s_thumbnail" src="assets/thumbnails/s2.webp">
+                </div>
+                <!-- vid bottom -->
+                <div class="short_meta">
+                  <!-- vid details -->
+                    <div class="short_info">
+                        <p class="short_title">
+                            This Feels Illegal For Some Reason
+                        </p>
+                        <!-- vid meta -->
+                        <p class="short_stats">
+                            34M views
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="short_container">
+            <div class="short_preview"> 
+                <!-- vid thumb -->
+                <div class="s_thumbnail_row">
+                    <img class="s_thumbnail" src="assets/thumbnails/s3.webp">
+                </div>
+                <!-- vid bottom -->
+                <div class="short_meta">
+                  <!-- vid details -->
+                    <div class="short_info">
+                        <p class="short_title">
+                            Surprised cat
+                        </p>
+                        <!-- vid meta -->
+                        <p class="short_stats">
+                            590M views
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="main_body">
+        <!--  video preview -->
+        <div class="videos2">
+            <!-- vid section -->
+            <div class="video_container">
+                <!-- vid cont -->
+                <div class="video_preview"> 
+                    <!-- vid thumb -->
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t5.jpg">
+                        <div class="video_time">6:3:05</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c5.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                Best of lofi hip hop 2021 📚 - beats to relax/study to
+
+                            </p>
+                            <p class="channel_name">
+                                Lofi Girl
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                29M views &#183; 1 year ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="video_preview">  
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t6.jpg">
+                        <div class="video_time">1:55:00</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c6.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                Best Of Tropical Deep House Music Chill Out Mix 2023🍓
+                            </p>
+                            <p class="channel_name">
+                                Miracle usic
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                3K views &#183; Streamed 23 hours ago
+                            </p>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <div class="video_container">
+                <div class="video_preview"> 
+                    <!-- vid thumb -->
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t7.jpg">
+                        <div class="video_time">14:13</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c7.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                Borussia Dortmund – FC Bayern München | Bundesliga, 10. Spieltag Saison 2023/24 | sportstudio
+                            </p>
+                            <p class="channel_name">
+                                sportstudio fussball
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                178K views &#183; 8 hours ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="video_preview"> 
+                    <!-- vid thumb -->
+                    <div class="thumbnail_row">
+                        <img class="thumbnail" src="assets/thumbnails/t8.jpg">
+                        <div class="video_time">15:57</div>
+                    </div>
+                    <!-- vid bottom -->
+                    <div class="video_meta">
+                        <!-- chan iccon -->
+                        <div class="channel_pic">
+                            <img class="profile" src="assets/channels/c8.jpg">
+                        </div>
+                        <!-- vid details -->
+                        <div class="video_info">
+                            <p class="video_title">
+                                Marc Gebauer: Der Uhrenkönig von Instagram | SPIEGEL TV
+                            </p>
+                            <p class="channel_name">
+                                DER SPIEGEL
+                            </p>
+                            <!-- vid meta -->
+                            <p class="video_stats">
+                                270K views &#183; 2 days ago
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id = "video_container">
-        <div id = "video1">
-            <div class = "video_player"></div>
-            <div class = "video_time"></div>
-            <div class = "video_title"></div>
-            <div class = "video_views"></div>
-            <div class = "video_day"></div>
-            <div class = "channel_name"></div>
-            <div class = "channel_icon"></div>
-        </div>
-        <div id = "video2">
-            <div class = "video_player"></div>
-            <div class = "video_time"></div>
-            <div class = "video_title"></div>
-            <div class = "video_views"></div>
-            <div class = "video_day"></div>
-            <div class = "channel_name"></div>
-            <div class = "channel_icon"></div>
-        </div>
-        <div id = "video3">
-            <div class = "video_player"></div>
-            <div class = "video_time"></div>
-            <div class = "video_title"></div>
-            <div class = "video_views"></div>
-            <div class = "video_day"></div>
-            <div class = "channel_name"></div>
-            <div class = "channel_icon"></div>
-        </div>
-        <div id = "video3">
-            <div class = "video_player"></div>
-            <div class = "video_time"></div>
-            <div class = "video_title"></div>
-            <div class = "video_views"></div>
-            <div class = "video_day"></div>
-            <div class = "channel_name"></div>
-            <div class = "channel_icon"></div>
-        </div>
-    </div>
-    <div id = "short_title">
-        <div id = "short_icon2"></div>
-        <div id = "short_text">Shorts</div>
-    </div>
-    <div id = "shorts_container">
-        <div id = "short1">
-            <div class = "short_player"></div>
-            <div class = "short_title"></div>
-            <div class = "short_views"></div>
-        </div>
-        <div id = "short2">
-            <div class = "short_player"></div>
-            <div class = "short_title"></div>
-            <div class = "short_views"></div>
-        </div>
-        <div id = "short3">
-            <div class = "short_player"></div>
-            <div class = "short_title"></div>
-            <div class = "short_views"></div>
-        </div>
-        <div id = "short4">
-            <div class = "short_player"></div>
-            <div class = "short_title"></div>
-            <div class = "short_views"></div>
-        </div>
-    </div>
-    <div id = "more_container">
-        <div id = "more_search_bar">
-            <input type="text" placeholder="Show more">
-            <div id = "arrow_down_icon"></div>
-        </div>
-    </div>
+
 </body>
 </html>

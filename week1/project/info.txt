@@ -3,3 +3,245 @@ Specs: Make a visual clone of YouTubeLinks to an external site. while viewed in 
 Note: The "links" don't have to actually function; the website just has to visually appear to be identical.
 
 Bonus: Up to 3 possible bonus points for making the website responsive. (mark on the submission that you made it responsive)
+
+
+
+           <input class="search_bar" type="text" placeholder="Search">
+            <form>
+                <input type="search" placeholder="Search...">
+                <button type="submit">Search</button>
+                
+            </form>
+
+
+            <button class="search_button">
+                
+                <div class="tooltip">Search</div>
+            </button>
+
+
+
+            <input id="search_bar" placeholder="Search">
+            <button id="search_button">Search</button>
+            <img class="search_icon" src="assets/icons/search.svg">
+
+
+
+                        <button class="butn">
+                <i class="material-symbols-outlined">account_circle</i> Sign in
+            </button>
+
+
+
+            vid css 
+
+            .videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 3rem 1rem;
+  padding: 3rem 0;
+  margin: 0 1.5rem;
+  border-top: 4px solid #ccc;
+  /* width: 100%;
+  height: 100%;
+  padding: 15px 25px;
+  border-top: 1px solid rgb(228, 228, 228);
+  overflow-y: scroll; */
+
+}
+
+.video_container:first-child {
+  border-top: none;
+}
+
+.video_preview {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+
+  
+}
+
+.video_preview{
+  /* width: 310px;
+  margin-right: 10px;
+  margin-bottom: 30px; */
+}
+
+.thumbnail_row{
+  /* width: 100%;
+  height: 170px; */
+  position: relative;
+  display: flex;
+}
+
+.thumbnail{
+  width: 100%;
+  height: 100%;
+  min-width: 250px;
+  min-height: 150px;
+  background-color: #AAA;
+  /* object-fit: cover;
+  width: 100%;
+  height: 100%; */
+
+}
+
+.thumbnail::before{
+  /* content: ""; */
+  position: absolute;
+  background-color: rgba(0, 0, 0, .85);
+  color: white;
+  right: 5px;
+  bottom: 5px;
+  padding: .1em , .3em;
+  border-radius: .3em;
+  font-size: .9rem;
+
+}
+
+.profile{
+  width: 36px;
+  border-radius: 50%;
+  height: 36px;
+  margin-right: .75rem;
+  background-color: #AAA;
+}
+
+.video_info{
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start;
+  margin-top: 1rem; */
+
+}
+
+.video_info{
+  display: flex;
+  flex-direction: column;
+}
+
+.video_title{
+  color: black;
+  /* line-height: 1px; */
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: .5rem;
+}
+
+.channel_name{
+  color: #555;
+  /* font-size: .9rem; */
+  margin-bottom: .1rem;
+}
+
+.video_stats{
+  color: #555;
+  /* font-size: .9rem; */
+  /* margin-bottom: .1rem; */
+}
+
+
+
+
+.thumbnail {
+    /* width: 100%; */
+  }
+  
+  .video_title {
+    /* margin-top: 0;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 10px;
+    margin-bottom: 10px; */
+  }
+  
+  .video_info {
+    /* display: grid;
+    grid-template-columns: 50px 1fr; */
+  }
+  
+  .profile {
+    /* width: 16px;
+    border-radius: 50px; */
+  }
+  
+  .thumbnail_row {
+    /* margin-bottom: 1px;
+    position: relative; */
+  }
+  
+  .channel_name,
+  .video_stats {
+    /* font-size:8;
+    color: rgb(96, 96, 96); */
+  }
+  
+  .channel_name {
+    /* margin-bottom: 4px; */
+  }
+  
+  .video_container {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+    /* grid-template-columns: 1fr 1fr 1fr; */
+
+    /* column-gap: 6px;
+    row-gap: 10px; */
+
+    
+  }
+  
+  .video_time {
+    font-family: Roboto, Arial;
+    font-size: 8px;
+    font-weight: 500;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 2px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 8px;
+    right: 4px;
+  }
+  /* @media (max-width: 750px) {
+    .video_section { */
+      /* grid-template-columns: 1fr 1fr; */
+      /* grid-template-columns: 1fr ;
+
+    }
+  } */
+  
+  /* @media (min-width: 751px) and (max-width: 999px) {
+    .video_section { */
+      /* grid-template-columns: 1fr 1fr 1fr; */
+      /* grid-template-columns: 1fr 1fr;
+
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    .video_section { */
+      /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+      /* grid-template-columns: 1fr 1fr 1fr;
+
+    }
+  }
+   */
+
+
+
+//// banner
+
+    <div id = "ad_banner">
+        <div class = "logo_icon"></div>
+        <div id = "ad_banner_text">YouTube Premium</div>
+        <div id = "ad_banner_text">What everything you love without ads</div>
+        <div id = "ad_banner_text">Get it now</div>
+        <div id = "ad_banner_img"></div>
+        <div id = "ad_banner_icon">(closing x)</div>
+
+    </div>
