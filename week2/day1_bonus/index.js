@@ -17,7 +17,7 @@ if (!(input === "yes" || input === "Yes" || input === "YES" || input === "y" || 
 }
 else {
     let input1 = prompt("Then you won't mind telling me what data type this is: 3");
-    let input2 = prompt("What about this: 'Am I real?'");
+    let input2 = prompt("What about this: \"Am I real?\"");
     let input3 = prompt("And this: false");
     let input4 = prompt("What is 2 + 2");
   
