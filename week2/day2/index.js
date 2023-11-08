@@ -15,7 +15,7 @@
 // > binary (0,1) only [input.filter(binary)]!
 // > sum of all numbers [input.sum()]
 
-let request = prompt("What program would you like to run? (length, yell, binary, or numSum?)");
+let request = prompt("What program would you like to run? (length, yell, binary, leet or numSum?)");
 let resp = "";
 
 if (request === "length") 
