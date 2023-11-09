@@ -1,0 +1,1 @@
+Mini clone of the [Rock, Paper, Scissors game,](https://jsday1.netlify.app/) as intro to JS. 
