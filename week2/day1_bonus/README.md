@@ -1,0 +1,1 @@
+Clone of a [program](https://day1bonus.netlify.app/) to separate machine from man. Intro to JS
