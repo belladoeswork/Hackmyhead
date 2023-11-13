@@ -1,8 +1,7 @@
 // TODO:
-
 // 1. create a word bank and randomly select a word
 function wordBank() {
-    let randomWord = Math.floor(Math.random() * 10) + 1;
+    let randomWord = Math.ceil(Math.random() * 10) + 1;
 
     let word;
 
