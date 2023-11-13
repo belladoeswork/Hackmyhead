@@ -73,7 +73,13 @@ function check(userGuess, word, blurred) {
 // 5. create a function for incorrect guesses emoji
 function getIncorrectGuessesWithEmoji(incorrectGuesses) {
     let emoji = "🪢";
-    return emoji.repeat(incorrectGuesses);
+    let result = "";
+
+    for (let i = 0; i < incorrectGuesses; i++) {
+        result += emoji;
+    }
+
+    return result;
 }
 
 // main game loop
