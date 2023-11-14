@@ -129,7 +129,8 @@ setInterval(function () {
 
   if (seconds === 0) {
     body.style.backgroundColor = "red";
-    body.innerHTML = "";
+    // body.innerHTML = "";
+    body.replaceChildren();
 
     let bombContainer = document.createElement("div");
     bombContainer.style.display = "flex";
