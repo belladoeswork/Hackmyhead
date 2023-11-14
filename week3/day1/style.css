@@ -1,0 +1,35 @@
+#square {
+  height: 40px;
+  width: 40px;
+  background-color: blue;
+  border: 2px solid blue;
+}
+
+.box {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+}
+
+#ghost {
+  font-size: 80px;
+}
+
+#bunnyContainer div:hover {
+    visibility: hidden;
+}
+
+.bunny {
+
+    font-size: 40px;
+}
+
+/* 
+#bunnyContainer:hover {
+    visibility: hidden; 
+} */
+
+/* .bunny:hover, .bunny:focus, .bunny:active {
+    opacity: 0;
+    visibility: hidden;
+} */
