@@ -1,0 +1,1 @@
+Clone of [website](jollyy.netlify.app) to practice JS event listeners

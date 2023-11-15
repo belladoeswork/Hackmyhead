@@ -1,0 +1,42 @@
+#box {
+    height: 90px;
+    width: 90px;
+    border: 1px solid black;
+    background-color: blue;
+
+}
+
+#input_box {
+    border: 1px solid black;
+    height: 30px;
+}
+
+#counterContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+
+#decr, #incr {
+    height: 25px;
+    border: 1px solid black;
+}
+
+#car {
+   font-size: 100px; 
+}
+
+#stopContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+
+#start, #stop, #clear {
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 6%;
+    margin-top: -55px;
+}
