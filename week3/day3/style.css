@@ -1,0 +1,17 @@
+#header {
+    display: flex;
+    justify-content: center;
+}
+
+#landing {
+    display: flex;
+    justify-content: center;
+}
+
+#row{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+}
