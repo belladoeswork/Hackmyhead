@@ -13,54 +13,93 @@ document.getElementById("row").style.display = "none";
 
 // function generate random numbers
 
-function generateRandom(){
-    let randoms = 10;
-    let numbers = [];
+function render() {
 
-    for (let i = 0; i < randoms; i++) {
-        let num = Math.floor(Math.random() * 100) + 1;
-        numbers.push(num);
-    }
-    return (numbers) ;
-} 
+    function generateRandom(){
+        let randoms = 10;
+        let numbers = [];
 
-const randomNum = generateRandom();
+        for (let i = 0; i < randoms; i++) {
+            let num = Math.floor(Math.random() * 100) + 1;
+            numbers.push(num);
+        }
+    
+        return (numbers) ;
+    } 
 
-
-// row appears on click + array
-landing.addEventListener("click", function() {
-
-    document.getElementById("row").style.display = "flex";
-    body.replaceChildren(header, row);
+    const randomNum = generateRandom();
 
 
-    // let generatedNum = generateRandom();
+    // row appears on click + array
+    landing.addEventListener("click", function() {
 
-    let numbersList = document.createElement("p");
-    numbersList.textContent = "[" + randomNum + ", " + "]";
+        document.getElementById("row").style.display = "flex";
+        body.replaceChildren(header, row);
 
-    numbersList.style.textAlign = "center";
-    numbersList.style.fontSize = "50px";
+        let numbersList = document.createElement("p");
+        numbersList.textContent = "[" + randomNum.join(", ") + "]";
 
-    body.appendChild(numbersList);
-});
+        numbersList.style.textAlign = "center";
+        numbersList.style.fontSize = "50px";
 
-// display first number
-let first = document.querySelector("#first");
-// let getFirst = generateRandom();
-let numbersList;
+        body.appendChild(numbersList);
+    });
+
+    // display first number
+    let first = document.querySelector("#first");
+
+    first.addEventListener("click", function() {
+
+        let getFirst = document.createElement("p");
+        getFirst.textContent = randomNum[0];
+
+        getFirst.style.textAlign = "center";
+        getFirst.style.fontSize = "50px";
+
+        body.replaceChildren(header, row, getFirst);
+        body.appendChild(getFirst);
+    })
 
 
-first.addEventListener("click", function() {
+    // add random number
+    let rand = document.querySelector("#rand");
 
+    rand.addEventListener("click", function() {
 
-    let getFirst = document.createElement("p");
-    getFirst.textContent = randomNum[0];
+        let addNum = Math.ceil(Math.random() * 100) + 1;
+        randomNum.push(addNum);
+        numbersList.textContent = "[" + randomNum.join(", ") + "]";
 
-    getFirst.style.textAlign = "center";
-    getFirst.style.fontSize = "50px";
+        numbersList.style.textAlign = "center";
+        numbersList.style.fontSize = "50px";
 
-    numbersList.replaceChildren();
+        body.replaceChildren(header, row, numbersList);
+    })
 
-    body.appendChild(getFirst);
-})
+                // add bears random number
+                let bears = document.querySelector("#bears");
+                let bList = document.querySelector("p");
+
+                bears.addEventListener("click", function() {
+
+                    let numbersList = document.createElement("p");
+                    numbersList.textContent = "[" + randomNum.join(", ") + "]";
+                    
+                    function bearNum(numbersList){
+                        let blurred = [];
+                    
+                        for (let i = 0; i < numbersList.length; i++) {
+                            blurred.push("🐻");
+                        }
+                        return blurred;
+                    }
+
+                    const blurredNums = bearNum(randomNum);
+
+                    numbersList.textContent = "[" + blurredNums.join(", ") + "]";
+
+                    body.replaceChildren(header, row, numbersList);
+                })
+
+        }
+        render();
