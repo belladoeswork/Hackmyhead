@@ -1,14 +1,6 @@
 let likesContainer = document.querySelector("#likesContainer");
 
-let people = [
-  {
-    id: 1,
-    name: "Max",
-    money: 0,
-    dogs: 0,
-    laptops: 0,
-  },
-];
+let people = [{name: "Max", money: 0, dogs: 0, laptops: 0}];
 
 function render() {
   for (let person of people) {
@@ -22,6 +14,9 @@ function render() {
     buyDogButton.textContent = "Buy a dog!";
     const message = document.createElement("p");
     likesContainer.appendChild(buyDogButton);
+
+    buyDogButton.style.marginRight = "5px";
+
 
     buyDogButton.addEventListener("click", function () {
       likesContainer.replaceChildren();
@@ -40,6 +35,9 @@ function render() {
     dogDiesButton.textContent = "Dog dies..";
     likesContainer.appendChild(dogDiesButton);
 
+    dogDiesButton.style.marginRight = "5px";
+
+
     dogDiesButton.addEventListener("click", function () {
       likesContainer.replaceChildren();
       if (person.dogs > 0) {
@@ -57,6 +55,8 @@ function render() {
     workButton.textContent = "Work to earn money!";
     likesContainer.appendChild(workButton);
 
+    workButton.style.marginRight = "5px";
+
     workButton.addEventListener("click", function () {
       likesContainer.replaceChildren();
       person.money += 100;
@@ -67,6 +67,9 @@ function render() {
     let buyLaptop = document.createElement("button");
     buyLaptop.textContent = "Buy a new laptop!";
     likesContainer.appendChild(buyLaptop);
+
+    workButton.style.marginRight = "5px";
+
 
     buyLaptop.addEventListener("click", function () {
       likesContainer.replaceChildren();
