@@ -7,6 +7,7 @@ let body = document.querySelector("body");
 let landing = document.querySelector("#landing");
 let row = document.querySelector("#row");
 let header = document.querySelector("#header");
+let numbers;
 
 // hiding row from landing page
 document.getElementById("row").style.display = "none";
@@ -17,7 +18,7 @@ function render() {
 
     function generateRandom(){
         let randoms = 10;
-        let numbers = [];
+        numbers = [];
 
         for (let i = 0; i < randoms; i++) {
             let num = Math.floor(Math.random() * 100) + 1;
@@ -27,15 +28,14 @@ function render() {
         return (numbers) ;
     } 
 
-    const randomNum = generateRandom();
+    let randomNum = generateRandom();
 
-    function bearNum(numbersList){
-        let blurred = [];
-
-        for (let i = 0; i < numbersList.length; i++) {
-            blurred.push("🐻");
+    function bearNum(randomNum){
+ 
+        for (let i = 0; i < randomNum.length; i++){
+            randomNum[i] = "🐻";
         }
-        return blurred;
+        return randomNum;
     }
 
     function replFibu(randomNum) {
@@ -43,38 +43,55 @@ function render() {
         for (let i = 1; i < randomNum.length; i++) {
 
             if ((randomNum[i] % 3 === 0) && (randomNum[i] % 5 === 0)) {
-                randomNum[i]("🫧✨");
+                randomNum[i] = "🫧✨";
             }
             else if (randomNum[i] % 3 === 0) {
-                randomNum[i]("🫧");
+                randomNum[i] = "🫧";
             }
             else if (randomNum[i] % 5 === 0) {
-                randomNum[i]("✨");
+                randomNum[i] = "✨";
             }
-            else
-                numbersList.textContent = "[" + randomNum.join(", ") + "]";
         }
-    }    // // Assuming numbersList is an array of mixed values (numbers and bears)
-    // function highestNum(arr) {
-    //     let num [];
-    //     let highestNum;
+        return randomNum;
+    }
+    
+    function isNums() {
+        for (let num of numbers) {
+            if (typeof num !== 'number') {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    //     for (let i = 0; i < arr.length; i++) {
-    //         // Check if the element is a number and if it's higher than the current highestNumber
-    //         if (typeof arr[i] === 'number' && (highestNumber === null || arr[i] > highestNumber)) {
-    //             highestNumber = arr[i];
-    //         }
-    //     }
+    let remove = document.querySelector("#remove");
+    let menu = document.createElement("option");
+    menu.textContent = "Remove a number!";
 
-    //     return highestNumber;
-    // }
+    function updateRemove() {
 
+        remove.innerHTML = "";
+        remove.appendChild(menu);
+
+        for (let num of randomNum) {
+            if (typeof num !== "number") {
+                continue;
+            }
+            let option = document.createElement("option");
+            option.value = num;
+            option.text = num;
+            remove.appendChild(option);
+        }
+    }
+    
 
 
     let numbersList = document.createElement("p");
     numbersList.textContent = "[" + randomNum.join(", ") + "]";
     numbersList.style.textAlign = "center";
     numbersList.style.fontSize = "50px";
+
+    updateRemove();
 
 
 
@@ -92,36 +109,44 @@ function render() {
     first.addEventListener("click", function() {
 
         let getFirst = document.createElement("p");
-        getFirst.textContent = randomNum[0];
 
+
+        for(let i = 0; i < randomNum.length; i++) {
+            if (typeof randomNum[i] !== "number") {
+                getFirst.textContent = "No number found in array.";
+            }
+            else {
+                getFirst.textContent = randomNum[i];
+                break;
+            }
+        }
+        
         getFirst.style.textAlign = "center";
         getFirst.style.fontSize = "50px";
 
         body.replaceChildren(header, row, getFirst);
         body.appendChild(getFirst);
-    })
+    
+    });
+
 
     // add random number
     let rand = document.querySelector("#rand");
 
     rand.addEventListener("click", function() {
-        let addNum = Math.ceil(Math.random() * 100) + 1;
-        randomNum.push(addNum);
-        // numbersList.textContent = "[" + randomNum.join(", ") + "]";
-
+        let addNum = Math.ceil(Math.random() * 100) + 1;    
 
         if (numbersList.textContent.includes("🐻")) {
-            let blurredNums = bearNum(randomNum);
-            blurredNums.push(addNum);
-
-            numbersList.textContent = "[" + blurredNums.join(", ") + "]";
-            // randomNum.push(addNum);
-        } else {
-            // randomNum.push(addNum);
-            numbersList.textContent = "[" + randomNum.join(", ") + "]";
+            randomNum.push(addNum);
         }
+        else{
+            randomNum.push(addNum);
+        }
+        updateRemove();
 
+        numbersList.textContent = "[" + randomNum.join(", ") + "]";
         body.replaceChildren(header, row, numbersList);
+
     })
 
     // bears list
@@ -129,7 +154,9 @@ function render() {
 
     bears.addEventListener("click", function() {
 
-        const blurredNums = bearNum(randomNum);
+        let blurredNums = bearNum(randomNum);
+        
+        updateRemove();
 
         numbersList.textContent = "[" + blurredNums.join(", ") + "]";
 
@@ -173,31 +200,93 @@ function render() {
     });
 
     // fizbuzz num: 1-100, %3 and 5 > fizzbuzz , %3 fizz, %5 buzz
-
     let fibu = document.querySelector("#fibu");
 
     fibu.addEventListener("click", function() {
 
         let fizzBuzz = document.createElement("p");
 
-        const fibuNum = replFibu(randomNum);
+        replFibu(randomNum);
 
-        numbersList.textContent = "[" + fibuNum.join(", ") + "]";         
-        //fizzBuzz.style.textAlign = "center";
-        // fizzBuzz.style.fontSize = "50px";   
+        updateRemove();
+
+        numbersList.textContent = "[" + randomNum.join(", ") + "]";            
         
         body.replaceChildren(header, row, numbersList);
-        // body.appendChild(fizzBuzz);
+    });
+
+    // heart show corresponding to num list
+    let heart = document.querySelector("#heart");
+
+    heart.addEventListener("click", function() {
+
+        if (!isNums()) {
+            alert(
+                "Super bonus hearts can only be performed with an array of all numbers. Please reset!"
+            );
+            return;
+        }
+
+        let i = 0; 
+
+        let intervalId = setInterval(function() {
+            if (i < randomNum.length) {
+                let heartShow = document.createElement("p");
+                let hearts = "❤️".repeat(randomNum[i]);
+
+                heartShow.textContent = hearts;
+                heartShow.style.textAlign = "center";
+                body.replaceChildren(header, row, numbersList, heartShow);
+                i++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }, 1000);
+
+    });
+
+    // remove dropdown
+
+    remove.appendChild(menu);
+
+    remove.addEventListener("change", function() {
+        
+            let selectedNum = remove.value;
+
+            // Remove the selected number from randomNum
+            if (selectedNum !== "Remove a number!") {
+
+                let newList = [];
+                for (let value of randomNum) {
+                    if (value != selectedNum) {
+                        newList.push(value);
+                    }
+                }
+                randomNum = newList;
+
+                updateRemove();
+                numbersList.textContent = "[" + randomNum.join(", ") + "]";
+                body.replaceChildren(header, row, numbersList);
+            }
+        
     });
 
 
+    // reset randomNum list
 
+    let reset = document.querySelector("#reset");
+    reset.addEventListener("click", function() {
+        randomNum = generateRandom();
 
-
+        
+        numbersList.textContent = "[" + randomNum.join(", ") + "]";
+        body.replaceChildren(header, row, numbersList);
+        updateRemove();
+    });
 
 
 }
-render();
+
+    render();
 
 
-        // /fix fix fizzbuzz of randomNum. if num % 3 == 0 && num %5 === 0 replace num in numberslist with fizzbuzz. if num %3 === 0 replace num in nunmberslist with fizz. if num %5 === 0 replace num in numberslist with buzz
