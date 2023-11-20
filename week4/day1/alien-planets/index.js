@@ -2,7 +2,7 @@ let body = document.querySelector("body");
 
 import { alienPlanets } from "./alienPlanets.js";
 
-let boxes = document.querySelector(".boxes")
+let boxes = document.querySelector(".boxes");
     
 for (let i = 0; i < alienPlanets.length; i++) {
 
