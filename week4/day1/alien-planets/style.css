@@ -1,5 +1,20 @@
 .boxes {
     display: flex;
     flex-direction: row;
-    
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.deets {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;
+    width: 80px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 900;
 }
