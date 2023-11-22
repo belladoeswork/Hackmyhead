@@ -9,22 +9,24 @@
 </head>
 <body>
     <h1>Hungry Pets</h1>
-    <div class="container">
-        <div class="pet_card">
-            <p class="emoji">🦜</p>
-            <h3 class="name">Whiskers</h3>
-            <div class="actions">
-                <p class="hunger">Hunger:</p>
-                <div id="hunger_progress">
-                    <div id="hunger_bar"></div>
+    <div id="petCardContainer">
+        <div class="container">
+            <div class="pet_card">
+                <p class="emoji"></p>
+                <h3 class="name"></h3>
+                <div class="actions">
+                    <label class="hunger">Hunger:</label>
+                    <div id="hunger_progress">
+                        <div id="hunger_bar"></div>
+                    </div>
+                    <label class="love">Love: </label>
+                    <div id="love_progress">
+                        <div id="love_bar"></div>
+                    </div>
                 </div>
-                <p class="love">Love:</p>
-                <div id="love_progress">
-                    <div id="love_bar"></div>
-                </div>
+                <button class="feed">Feed Me 🍞</button>
+                <p class="quotes"></p>
             </div>
-            <button class="feed">Feed me 🍞</button>
-            <p class="quotes"></p>
         </div>
     </div>
 </body>
