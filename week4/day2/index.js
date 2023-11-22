@@ -3,7 +3,7 @@ let objectsArray = [
       id: 1,
       name: "Victor",
     },
-  ];
+];
   
   const cloneContainer = document.querySelector("#clone-container");
   const select = document.querySelector("select");
