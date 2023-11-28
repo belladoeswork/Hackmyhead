@@ -12,16 +12,12 @@ export default function Home() {
   return (
     <main>
       <div>
-        <h3>1</h3>
-        <Divider />
+        <Divider section="1" />
         <div className="square"></div>
-        <h3>2</h3>
-        <Divider />
+        <Divider section="2"  />
         <img src="/meme.webp" />
-
-        <h3>3</h3>
-        <Divider />
-        <h3>Alien Planets</h3>
+        <Divider section="3"  />
+        <h2>Alien Planets</h2>
         <div className="control">
           {planets.map((planet) => {
             return ( 
@@ -29,7 +25,7 @@ export default function Home() {
                 <div className="planet-boxes">
                   <p>{planet.emoji}</p>
                   <p>{planet.name}</p>
-                  <p>{planet.text}</p>
+                  <p>{planet.name} is {planet.distanceFromEarth} miles from earth. {planet.name} is believed to {planet.hasLife ? "have life" : "not have life"}. The atmosphere of Xenophylia is {planet.atmosphere}.</p>
                 </div>
               </div>
             );
