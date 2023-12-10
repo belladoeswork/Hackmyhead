@@ -44,6 +44,9 @@ export default function NewComment({post}) {
     }
 
     function toggleInput() {
+        if (showInput) {
+            return;
+        }
         setShowInput(!showInput);
     }
 

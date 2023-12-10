@@ -21,7 +21,10 @@ export default function EditPost({ post }) {
         setPostText(event.target.value);
     };
 
-    const toggleInput = () => {
+    function toggleInput() {
+        if (isEditing) {
+            return;
+        }
         setIsEditing(!isEditing);
     };
 
