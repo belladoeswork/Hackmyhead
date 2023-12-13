@@ -35,7 +35,7 @@ export async function PUT(request, response) {
         where: {
           id: postId,
         },
-        data: { likes: likes+1 },
+        data: { likes: {increment: 1,} },
     });
     return NextResponse.json({ success: true, post: updatedpostlikes});
   } catch (error) {

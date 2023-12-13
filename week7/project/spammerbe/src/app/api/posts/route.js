@@ -9,6 +9,8 @@ export async function GET() {
   return NextResponse.json({ success: true, posts });
 }
 
+
+
 //create new post
 export async function POST(request, response) {
   
