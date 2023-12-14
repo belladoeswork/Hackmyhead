@@ -57,7 +57,7 @@ export default function NewComment({post}) {
 
  
 
-    return (
+    return (  
         <div className="new-comment-container" >
         <p className="comment-bttn" onClick={toggleInput}>💬</p>
         {showInput && (

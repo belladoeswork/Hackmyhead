@@ -1,6 +1,9 @@
 import NewPost from "@/components/NewPost.jsx";
 import Posts from "@/components/Posts.jsx";
 
+
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   return (
     <main>
