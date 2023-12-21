@@ -1,11 +1,15 @@
 import { prisma } from "@/lib/prisma.js";
 import { NextResponse } from "next/server.js";
 import bcrypt from "bcrypt";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
 
 
 
 export async function POST(request) {
   try {
+
+    const cookieStore = cookies();
 
     // no info to create account
     const { username, password } = await request.json();
@@ -35,6 +39,14 @@ export async function POST(request) {
     const newUser = await prisma.users.create({
       data: { username, password: hashedPassword },
     });
+
+    // token for new user
+    const token = jwt.sign(
+      { userId: user.id, username },
+      process.env.JWT_SECRET
+    );
+
+    cookieStore.set("token", token);
 
     delete user.password;
     console.log(username, password);
