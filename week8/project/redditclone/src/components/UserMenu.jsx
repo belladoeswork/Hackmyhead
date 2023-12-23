@@ -1,58 +1,27 @@
 "use client";
 
-// import { useState } from "react";
-
-// import Link from "next/link";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
-// import Login from "@/app/login/page";
-
-// // import NoUserList from "./NoUserList";
-// // import UserList from "./UserList";
-
-
-
-// export default function UserMenu() {
-
-//     const [selectedOption, setSelectedOption] = useState("");
-//     const [showInput, setShowInput] = useState(false);
-//     const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
-
-
-//     function toggleInput() {
-//         setShowInput((prev) => !prev);
-//     }
-    
-//     const openLoginPopup = () => {
-//         setLoginPopupOpen(true);
-//     };
-
-//     return (
-//         <div className="menu">
-//             <div className="select-wrapper">
-//                 <button className="options" onClick={() => setShowInput(true)}>
-//                     <FontAwesomeIcon icon={faCircleUser} />
-//                 </button>
-//                 {showInput && <button onClick={openLoginPopup}>Login / Register</button>}
-//                 {isLoginPopupOpen && <Login toggle={() => setLoginPopupOpen(false)} />}
-//             </div>
-//             <div className="selected-option">{selectedOption}</div>
-//         </div>
-//     )
-// }
-
-
+import Link from "next/link";
 import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import Login from "@/app/login/page";
+// import Logout from "@/components/Logout.jsx";
+import Logout from "./Logout.jsx";
+import { fetchUser } from  "@/lib/fetchUser.js";
 
 
-export default function UserMenu() {
+
+
+
+export default function UserMenu({ userUpdated, toggleUserUpdate }) {
 
     const [isPopupOpen, setPopupOpen] = useState(false);
     const iconButtonRef = useRef(null);
     const popupRef = useRef(null);
+    const [user, setUser] = useState(null);
+    const [isLoading, setLoading] = useState(true);
+
   
     const openPopup = () => {
       setPopupOpen((prevState) => !prevState);
@@ -64,8 +33,10 @@ export default function UserMenu() {
   
     const handleLoginButtonClick = () => {
       console.log('Login button clicked');
+      closePopup();
     };
-  
+
+
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -92,6 +63,23 @@ export default function UserMenu() {
       };
     }, []);
 
+
+    useEffect(() => {
+      const getUser = async () => {
+        try {
+          const userData = await fetchUser();
+          setUser(userData);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+  
+        setLoading(false);
+      
+      };
+  
+      getUser();
+    }, []);
+
   return (
     <div className="menu">
       <div className="select-wrapper">
@@ -104,22 +92,38 @@ export default function UserMenu() {
           <FontAwesomeIcon icon={faAngleDown} className="dropdown-icon" />
         </button>
 
-        {isPopupOpen && (
+        {isPopupOpen && !isLoading && (
           <div
             ref={popupRef}
             className="popup"
             style={{
               position: 'absolute',
-              top: '-210px',
-              left: '51%',
+              top: '-205px',
+              left: '74%',
               width: '33%',
             }}
           >
             <div className="popup-inner">
               <div className="options-list">
-                <button className="bttn" onClick={handleLoginButtonClick}>
-                  Login / Register
-                </button>
+                {user.id && (
+                  <div>
+                    <p>Welcome, {user.username}!</p>
+                    <Link href="/" >
+                      <button className="bttn" style={{ textDecoration: 'none' }} >
+                        <Logout />
+                      </button>
+                    </Link>
+                  </div>
+                )}
+                {!user.id && (
+                  <div>
+                    <Link href="/login" style={{ textDecoration: 'none' }}>
+                      <button className="bttn" onClick={handleLoginButtonClick} >
+                        Login / Register
+                      </button>
+                    </Link> 
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -130,42 +134,3 @@ export default function UserMenu() {
 }
 
 
-
-
-
-
-
-
-            {/* <button className="options" onClick={() => handleDropdownChange("")}>
-                <FontAwesomeIcon icon={faCircleUser} />   
-            </button> */}
-    // setShowInput(false);
-
-    // function toggleInput() {
-    //     if (showInput) {
-    //         return;
-    //     }
-    //     setShowInput(!showInput);
-    // }
-
-
-    // const openLoginPopup = () => {
-    //     setLoginPopupOpen(true);
-    // };
-
-    
-
-    
-
-
-
-    // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    // const handleDropdownToggle = () => {
-    //     setIsDropdownOpen((prev) => !prev);
-    // };
-
-    // const handleDropdownChange = (option) => {
-    //     setSelectedOption(false);
-    //     setSelectedOption(option);
-    // };

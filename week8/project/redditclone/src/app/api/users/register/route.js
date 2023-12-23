@@ -6,13 +6,14 @@ import jwt from "jsonwebtoken";
 
 
 
-export async function POST(request) {
+export async function POST(request, response) {
   try {
 
     const cookieStore = cookies();
 
     // no info to create account
     const { username, password } = await request.json();
+
     if (!username || !password) {
       return NextResponse.json({
         success: false,
@@ -40,20 +41,30 @@ export async function POST(request) {
       data: { username, password: hashedPassword },
     });
 
+    console.log(newUser);
+
+    if (!newUser) {
+      return NextResponse.json({
+        success: false,
+        error: "Failed to create user.",
+      });
+    }
+
+    delete newUser.password;
+
     // token for new user
-    const token = jwt.sign(
-      { userId: user.id, username },
-      process.env.JWT_SECRET
-    );
+    const token = jwt.sign( { userId: newUser.id }, process.env.JWT_SECRET);
 
     cookieStore.set("token", token);
 
-    delete user.password;
-    console.log(username, password);
     
-    return NextResponse.json({ success: true, newUser });
+    // console.log(username, password);
+    
+    return NextResponse.json({ success: true, newUser, token });
 
   } catch (error) {
+
+    console.error(error);
 
     return NextResponse.json({ success: false, error: error.message });
   }

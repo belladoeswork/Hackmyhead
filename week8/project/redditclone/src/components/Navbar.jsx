@@ -6,28 +6,40 @@ import Register from "@/app/register/page";
 import SearchBar from "@/components/SearchBar.jsx";
 import LogReg from "@/components/LogReg.jsx";
 import UserMenu from "@/components/UserMenu.jsx";
-
-
+import Home from "@/components/Home.jsx";
+import SideNav from "@/components/SideNav.jsx";
+import redditFace from "@/../public/redditFace.svg";
+import Image from "next/image";
 import { fetchUser } from  "@/lib/fetchUser.js";
 
 
 export default async function Navbar() {
 
+  // welcome user ?
+  const user = await fetchUser();
+
 
   return (
-    <div className="navbar">
-      <div className="nav-section">
-        <Link href={"/"}>Home</Link>
+    <div>
+      <div className="navbar">
+        <div className="left-section">
+          <Home />
+        </div>
+        <div className="center-section">
+          <SearchBar />
+        </div>
+        <div className="right-section">
+          <div className="auth-section">
+          {!user.id && (
+            <div>
+              <LogReg />
+            </div>
+          )}
+              <UserMenu />
+          </div>
+        </div>
       </div>
-      <div className="nav-section">
-        <SearchBar />
-      </div>
-      <div className="nav-section">
-        <LogReg />
-      </div>
-      <div className="nav-section">
-        <UserMenu />
-      </div>
+      <SideNav />
     </div>
   );
 }
