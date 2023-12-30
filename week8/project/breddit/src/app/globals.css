@@ -468,6 +468,152 @@ p {
 }
 
 .subreddit-name {
-  margin: 0 10px; /* Adjust the spacing between the logo, name, and button */
+  margin: 0 10px; 
+}
+
+
+
+/* posts feed */
+
+.post-container {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e6e2f717;
+}
+
+.post-container:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+}
+
+
+.post-info {
+  font-size: 12px;
+  margin-top: 20px;
+  color: #888;
+}
+
+
+.post-sub {
+  font-size: 12px;
+  align-items: center;
+  margin-top: 20px;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+
+.post-sub:hover {
+  color: #6357e8;
+  transform: scale(1.2);
+}
+
+.right-header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 9px;
+}
+
+.post-bttn {
+  background-color: #6357e8;
+  color:#fff;
+  cursor: pointer;
+  border-radius: 15px;
+  height: 20px;
+  border: 1px solid #6357e8;
+  padding: 0 20px;
+  font-size: 10px;
+  margin-bottom: 5px;
+  width: 20%;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.post-bttn:hover {
+  background-color: #6357e8d6;
+  cursor: pointer;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  height: 15px;
+  padding: 4px;
+  margin-bottom: 5px;
+}
+
+.icon-wrapper:hover {
+  background-color: #afafafb6;
+  cursor: pointer;
+}
+
+
+.post-footer {
+  display: flex;
+  gap: 8px;
+}
+
+.post-votes, .post-comments {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  width: 6%;
+  height: 8px;
+  padding: 10px;
+  background-color: #c1bfbfb6;
+  border-radius: 30px;
+}
+
+.up-votes:hover, .down-votes:hover {
+  background-color: #afafafb6;
+  cursor: pointer;
+  border-radius: 50%;
+  height: 8px;
+  padding: 7px;
+}
+
+
+.post-share {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 5px;
+  width: 10%;
+  height: 8px;
+  padding: 10px;
+  background-color: #c1bfbfb6;
+  border-radius: 30px;
+}
+
+.post-comments:hover, .post-share:hover {
+  background-color: #afafafb6;
+  cursor: pointer;
 }
 

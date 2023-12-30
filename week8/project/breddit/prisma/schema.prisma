@@ -39,7 +39,7 @@ model Post {
   message String
   userId String
   subredditId String
-  parentId String
+  parentId String?
   votes Vote[]
   createAt DateTime @default(now())
   children Post[] @relation("parentChildRelation")

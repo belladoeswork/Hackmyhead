@@ -1,3 +1,4 @@
+"use client"
 
 import { prisma } from "@/lib/prisma.js";
 import Link from "next/link";
@@ -5,62 +6,74 @@ import redditFace from "@/../public/redditFace.svg";
 import Image from "next/image";
 import bgimg from "@/../public/bgimg.webp";
 import JoinSub from "@/components/joinsub";
+import Feed from "@/components/feed";
+import { useState, useRef, useEffect } from 'react';
+import Post from "@/components/Post";
 
 
-
-export default async function Posts() {
-
-
-    // fetch from  db
-    const Posts = await prisma.post.findMany({
-        include: {
-        subreddit: true,
-        createdAt,
-        },
-    });
-
-    subreddits.sort((a, b) => b.subscribers.length - a.subscribers.length);
-
-    console.log(subreddits);
-
-
-
+export default function Posts() {
+    const [posts, setPosts] = useState([]);
+  
+    useEffect(() => {
+        fetch('/api/posts')
+          .then(response => response.json())
+          .then(data => {
+            if (data.posts) {
+              setPosts(data.posts);
+            } else {
+              console.error('Unexpected response', data);
+            }
+          });
+    }, []);
+    
+  
     return (
-        <div className="communities-section">
-            <Image
-                src={bgimg}
-                alt="cover img"
-                style={{ objectFit: "cover" }}
-                width={250}
-                height={90}
-            />
-            <h4>Top Communities</h4>
-                <div className="subreddit-list">
-                    {subreddits.map((subreddit) => (
-
-                        <div key={subreddit.id} className="subreddit-item">
-                            <Image src={redditFace} alt="Reddit Logo" className="comlogo" width={25} height={25} />
-                            
-                            <Link href={`/subreddits/${subreddit.id}`} style={{ textDecoration: 'none' }}>
-                            <span className="subreddit-name"> r/{subreddit.name} </span>
-                            <p>{subreddit.subscribers.length} subscribers</p>
-                            </Link>
-
-                            <Link href={`/subreddits/${subreddit.id}`} style={{ textDecoration: 'none' }}>
-                                {/* <JoinSub className="join-bttn" subredditId={subreddit.id} /> */}
-                                <button className="join-bttn">Join</button>
-                            </Link>             
-
-                        </div>
-                    ))}        
+      <div className="feed-section">
+        <h4>feed</h4>
+        <div className="posts-list">
+            {posts.map((post) => (
+                <div key={post.id} className="post-item">
+                    <Post key={post.id} post={post} />
                 </div>
-                <div className="class-bttn">
-                    <Link href="/subreddits">
-                      <button className="view">View All</button>
-                    </Link>
-                </div> 
-
+            ))}
         </div>
+      </div>
     );
 }
+
+
+
+// export default async function Posts( { params }) {
+
+//     const { postId } = params;
+
+//     const post = await prisma.post.findFirst({
+//         where: { id: postId },
+//         include: { subreddit: true, },
+//     });
+
+
+//     const subreddits = await prisma.post.findMany({ where: { postId } });
+
+
+//     console.log(post);
+
+
+
+//     return (
+//         <div className="feed-section">
+
+//             <h4>feed</h4>
+//                 <div className="posts-list">
+//                     {post.map((post) => (
+
+//                         <div key={post.id} className="post-item">
+//                             <Feed />
+//                         </div>
+//                     ))}        
+//                 </div>
+//         </div>
+//     );
+// }
+
 
