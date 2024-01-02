@@ -1,5 +1,8 @@
 body {
   background-color: #e6e2f78b;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
 }
 
 /* top navbar */
@@ -269,26 +272,6 @@ body {
 
 
 /* side bar */
-
-/* .side {
-  display: flex;
-  flex-direction: column;
-} */
-
-
-/* .side-navbar {
-  width: 250px;
-  background-color: #fff;
-  padding: 10px;
-  display: flex;
-  border: 1px solid rgba(239, 237, 237, 0.786);
-  border-radius: 4px;
-  flex-direction: column;
-  position: fixed;
-  top: 100px;
-  right: 220px;
-  height: 270px;
-} */
 
 .logo-section {
   display: flex;
@@ -591,12 +574,14 @@ p {
   border-radius: 30px;
 }
 
+.up-votes, .down-votes {
+  transition: background-color 0.3s ease;
+
+} 
+
 .up-votes:hover, .down-votes:hover {
-  background-color: #afafafb6;
   cursor: pointer;
-  border-radius: 50%;
-  height: 8px;
-  padding: 7px;
+  transform: scale(1.2);
 }
 
 
@@ -617,3 +602,83 @@ p {
   cursor: pointer;
 }
 
+/* fixing the feed */
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.content-container > *{
+  flex: 1 0 auto;
+  margin: 0 1px;
+}
+
+.rightfeed-section {
+  display: flex;
+  flex-direction: column;
+  flex: 0.1 1 auto;
+}
+
+
+.feed {
+  flex: 0.9 1 auto;
+}
+
+/* create post bar */
+.create-container {
+  margin-top: 10px;
+  background-color: #fff;
+  width: 100%; 
+  border: 1px solid #ccc;
+  padding: 10px 10px;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+.elements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+}
+
+.profile, .content-text, .image-icon {
+  margin: 0 10px;
+}
+
+.profile {
+  font-size: 30px;
+  margin: 0 10px;
+}
+
+.content-text {
+  padding-left: 10px;
+  width: 80%;
+  height: 35px;
+  border-radius: 4px;
+}
+
+.content-text:hover, .content-text:focus {
+  outline: auto;
+  outline-color: blue;
+}
+
+.profile:hover {
+  cursor: pointer;
+}
+
+.image-icon {
+  cursor: pointer;
+  padding: 10px;
+  background-color: transparent; 
+  box-sizing: content-box;
+}
+
+.image-icon:hover {
+  background-color: #c1bfbfb6;
+}

@@ -5,15 +5,31 @@ import SideBar from '@/app/sidebar/page';
 
 import Feed from "@/components/Feed.jsx";
 
-
 export default function Home() {
+
+    // return (
+    //     <div>
+    //         <Navbar/>
+    //         <div className="content-container">
+    //             <Subreddits />
+    //             <SideBar userLoggedIn={false} />
+    //         </div>
+    //         <div className="right-section">
+    //             <Feed />      
+    //         </div>
+    //     </div>
+    // )
 
     return (
         <div>
             <Navbar/>
-            <Subreddits />
-            <SideBar userLoggedIn={false} />
-            <Feed />
+            <div className="content-container">
+                <Feed className="feed"/>
+                <div className="rightfeed-section">
+                    <Subreddits />
+                    <SideBar userLoggedIn={false} />
+                </div>
+            </div>
         </div>
     )
 }

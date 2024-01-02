@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedditAlien } from '@fortawesome/free-brands-svg-icons';
 import { faCircleUser, faComment  } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faShare, faEllipsisH, faLongArrowAltUp, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
-import Logout from "@/components/Logout.jsx";
-import { fetchUser } from  "@/lib/fetchUser.js";
+import Link from 'next/link';
 
 import { formatDistanceToNow } from 'date-fns';
+
+
 
 function formatTimeAgo(date) {
     const now = new Date();
@@ -33,38 +34,42 @@ function formatTimeAgo(date) {
 export default function Post({ post }) {
 
     return (
-        <div className="post-container">
-            <div className="post-header">
-                <div className="left-header">
-                    <FontAwesomeIcon icon={faRedditAlien} size="2x" /> 
-                    <p className="post-sub"> r/{post.subreddit?.name} </p>
-                    <p className="post-info">· {formatTimeAgo(new Date(post.createAt))} </p>
+        <Link href={`/post/${post.id}`} style={{textDecoration: "none", color:"inherit" }}>
+            <div className="post-container">
+                <div className="post-header">
+                    <div className="left-header">
+                        <FontAwesomeIcon icon={faRedditAlien} size="2x" /> 
+                        <p className="post-sub"> r/{post.subreddit?.name} </p>
+                        <p className="post-info">· {formatTimeAgo(new Date(post.createAt))} </p>
+                    </div>
+                    <div className="right-header">
+                        <button className="post-bttn">Join</button>
+                        <div className="icon-wrapper">
+                            <FontAwesomeIcon icon={faEllipsisH} />
+                        </div>
+                    </div>   
                 </div>
-                <div className="right-header">
-                    <button className="post-bttn">Join</button>
-                    <div className="icon-wrapper">
-                        <FontAwesomeIcon icon={faEllipsisH} />
+                <h4 className="post-title">{post.title}</h4>
+                <div className="post-footer">
+                    <div className="post-votes">
+                        <div className="up-votes">
+                            <FontAwesomeIcon icon={faLongArrowAltUp} />
+                        </div>
+                        <p> {post.votes}</p>
+                        <div className="down-votes">
+                            <FontAwesomeIcon icon={faLongArrowAltDown} />
+                        </div> 
                     </div>
-                </div>   
-            </div>
-            <h4 className="post-title">{post.title}</h4>
-            <div className="post-footer">
-                <div className="post-votes">
-                    <div className="up-votes">
-                        <FontAwesomeIcon icon={faLongArrowAltUp} />
+                    <div className="post-comments">
+                        <FontAwesomeIcon icon={faComment}/> 
                     </div>
-                    <p> {post.votes}</p>
-                    <div className="down-votes">
-                        <FontAwesomeIcon icon={faLongArrowAltDown} />
+                    <div className="post-share">
+                        <FontAwesomeIcon icon={faShare}/>  Share 
                     </div> 
                 </div>
-                <div className="post-comments">
-                    <FontAwesomeIcon icon={faComment}/> 
-                </div>
-                <div className="post-share">
-                    <FontAwesomeIcon icon={faShare}/>  Share 
-                </div> 
             </div>
-        </div>
+
+        </Link>
+        
     );
   }

@@ -3,6 +3,18 @@ import { NextResponse } from "next/server.js";
 import { fetchUser } from  "@/lib/fetchUser.js";
 
 
+
+//get all subs
+export async function GET(request, response) {
+  try {
+    const subreddits = await prisma.subreddit.findMany();
+    return NextResponse.json({ success: true, subreddits }); 
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
+  }
+}
+
+// create sub
 export async function POST(request, response) {
   
   try {
