@@ -64,3 +64,23 @@ export default async function Subreddit({ params }) {
         </div>
     );
 }
+
+
+// join sub
+
+export async function POST(request, response) {
+  const { userId } = request.body;
+  const { subredditId } = request.params;
+
+  try {
+    await prisma.userSubreddit.create({
+      data: {
+        userId,
+        subredditId,
+      },
+    });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
+  }
+}

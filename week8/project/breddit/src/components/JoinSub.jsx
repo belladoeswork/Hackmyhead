@@ -1,39 +1,18 @@
-// "use client";
+"use client";
 
-// import { fetchUser } from '@/lib/fetchUser';
+import { fetchUser } from '@/lib/fetchUser';
+import { useRouter } from "next/navigation.js";
+import { useState, useEffect } from 'react'; 
 
-// export default function JoinSub({ subredditId }) {
-
-//     const subscribe = async () => {
-//       const response = await fetch('/api/subscribe', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ subredditId, userId: user.id }),
-//       });
-  
-//       if (response.ok) {
-//         // Handle successful subscription
-//       } else {
-//         // Handle error
-//       }
-//     };
-  
-//     return (
-//       <button className="join-bttn" onClick={subscribe}>Join</button>
-//     );
-// }
-
-
-// joinsub.jsx
-import { fetchUser } from '@/lib/fetchUser'; // Import the fetchUser function
 
 export default function JoinSub({ subredditId }) {
-  const [user, setUser] = useState(null); // Initialize user state
+  const [user, setUser] = useState(null);
+  const [subscribersCount, setSubscribersCount] = useState(""); 
 
   useEffect(() => {
     const getUser = async () => {
-      const fetchedUser = await fetchUser(); // Fetch the user
-      setUser(fetchedUser); // Set the user state
+      const fetchedUser = await fetchUser(); 
+      setUser(fetchedUser); 
     };
 
     getUser();
@@ -45,16 +24,20 @@ export default function JoinSub({ subredditId }) {
       return;
     }
 
-    const response = await fetch('/api/subscribe', {
+    const response = await fetch('/api/JoinSub', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subredditId, userId: user.id }),
+      body: JSON.stringify({ subredditId: subredditId, userId: user.id }),
     });
 
     if (response.ok) {
-      // Handle successful subscription
+      alert('Successfully joined subreddit!');
+
+      const countResponse = await fetch(`/api/subreddits/${subredditId}/subscribersCount`);
+      const { subscribersCount } = await countResponse.json();
+      setSubscribersCount(subscribersCount);
     } else {
-      // Handle error
+      alert('Failed to join subreddit.');
     }
   };
 

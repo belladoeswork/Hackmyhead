@@ -19,6 +19,7 @@ export async function POST(request, response) {
   
   try {
     const { name } = await request.json();
+    const { userId, subredditId } = request.json();
 
     const user = await fetchUser();
 
@@ -44,6 +45,9 @@ export async function POST(request, response) {
 
     const sub = await prisma.subreddit.create({ data: { name, creatorId: user.id} });
 
+    // // Subscribe the creator to the sub
+    // await prisma.subscription.create({ data: { userId: user.id, subredditId: sub.id } });
+
     return NextResponse.json({ success: true, sub });
 
   } catch (error) {
@@ -54,3 +58,4 @@ export async function POST(request, response) {
     );
   }
 }
+

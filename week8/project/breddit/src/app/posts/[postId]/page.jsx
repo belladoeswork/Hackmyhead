@@ -5,7 +5,7 @@ import Link from "next/link";
 import redditFace from "@/../public/redditFace.svg";
 import Image from "next/image";
 import bgimg from "@/../public/bgimg.webp";
-import JoinSub from "@/components/joinsub";
+import JoinSub from "@/components/JoinSub.jsx";
 import Feed from "@/components/feed";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faArrorRightFromBracket, faSquarePen, faTrashCan, faArrowUpFromBracket , faUpLong, faDownLong, faEllipsis, faMessage } from '@fortawesome/free-regular-svg-icons';
@@ -42,7 +42,7 @@ export default function PostPage() {
                 <div className="right-header">
                     <button className="post-bttn">Join</button>
                     <div className="icon-wrapper">
-                        <FontAwesomeIcon icon={faEllipsisH} />
+                        <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                 </div>   
             </div>

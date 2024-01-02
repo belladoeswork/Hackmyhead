@@ -59,6 +59,25 @@ export default function CreateSub({ user, setShowCreateSub }) {
     
     if (info.success) {
 
+      // creator autojoins
+
+      const joinResponse = await fetch(`/api/subreddits/${info.subreddit.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subredditId: info.subreddit.id,
+          userId: user.id,
+        }),
+      });
+  
+      if (!joinResponse.ok) {
+        console.error('Failed to join subreddit.');
+      }
+
+
+      //create sub process cont.
       setShowCreateSub(false);
       router.push('/subreddits');
 

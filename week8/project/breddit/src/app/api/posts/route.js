@@ -13,6 +13,8 @@ export async function GET(request, response) {
       },
     });
 
+    posts.sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
+
     // Fetch the parent and children for each post if they exist
     const postsWithRelations = await Promise.all(
       posts.map(async (post) => {
@@ -39,33 +41,76 @@ export async function GET(request, response) {
 }
 
 
-// export async function GET(request, response) {
+
+
+// export async function POST(request, response) {
+//   console.log("REQUEST BODY:", request.body);
+//   const {  } = request.body;
+
+//   // const user = await fetchUser();
+//   let user;
+//   try {
+//     user = await fetchUser(request);
+//   } catch (error) {
+//     console.error('Error fetching user:', error);
+//     return NextResponse.json({ success: false, error: 'Error fetching user' });
+//   }
+
+//   // Validate the user
+//   if (!user || !user.id) {
+//     return NextResponse.json({ success: false, error: 'Invalid user' });
+//   }
 
 //   try {
-
-//     const posts = await prisma.post.findMany({
-//       include: {
-//         subreddit: true,
-//         user: true,
-//         parent: {
-//           select: {
-//             id: true,
-//             title: true,
-//           },
-//           where: {
-//             parentId: {
-//               not: null
-//             }
-//           }
-//         },
-//         children: true, 
+//     const newPost = await prisma.post.create({
+//       data: {
+//         subredditId,
+//         title,
+//         text,
+//         userId: user.id,
+//         // You also need to provide the userId here. You can get it from the request if you have authentication set up.
+//         // userId: request.user.id,
 //       },
 //     });
 
+//     return NextResponse.json({ success: true, post: newPost });
 //   } catch (error) {
-
 //     return NextResponse.json({ success: false, error: error.message });
 //   }
 // }
+
+
+// create new post
+export async function POST(request, response) {
+  
+  try {
+    const { subredditId, title, message } = await request.json();
+
+    const user = await fetchUser();
+
+    //no title provided?
+
+    if (!title) {
+      return NextResponse.json({
+        success: false,
+        error: "Please give the post a title.",
+      });
+    }
+
+    const newPost = await prisma.post.create({ data: { title, userId: user.id, message, subredditId} });
+
+    return NextResponse.json({ success: true, newPost });
+
+  } catch (error) {
+
+    return (
+
+        NextResponse.json({ success: false, error: error.message })
+    );
+  }
+}
+
+
+
 
 

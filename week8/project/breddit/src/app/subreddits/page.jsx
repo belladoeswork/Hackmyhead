@@ -4,7 +4,7 @@ import Link from "next/link";
 import redditFace from "@/../public/redditFace.svg";
 import Image from "next/image";
 import bgimg from "@/../public/bgimg.webp";
-import JoinSub from "@/components/joinsub";
+import JoinSub from "@/components/JoinSub.jsx";
 
 
 
@@ -21,7 +21,6 @@ export default async function Subreddits() {
     subreddits.sort((a, b) => b.subscribers.length - a.subscribers.length);
 
     console.log(subreddits);
-
 
 
     return (
@@ -46,8 +45,8 @@ export default async function Subreddits() {
                             </Link>
 
                             <Link href={`/subreddits/${subreddit.id}`} style={{ textDecoration: 'none' }}>
-                                {/* <JoinSub className="join-bttn" subredditId={subreddit.id} /> */}
-                                <button className="join-bttn">Join</button>
+                                <JoinSub className="join-bttn" subredditId={subreddit.id} />
+                                {/* <button className="join-bttn">Join</button> */}
                             </Link>             
 
                         </div>

@@ -5,10 +5,11 @@ import Link from "next/link";
 import redditFace from "@/../public/redditFace.svg";
 import Image from "next/image";
 import bgimg from "@/../public/bgimg.webp";
-import JoinSub from "@/components/joinsub";
-import Feed from "@/components/feed";
+import JoinSub from "@/components/JoinSub.jsx";
+import Feed from "@/components/Feed.jsx";
 import { useState, useRef, useEffect } from 'react';
-import Post from "@/components/Post";
+import Post from "@/components/Post.jsx";
+import SortPostsBy from "@/components/SortPostsBy.jsx";
 
 
 export default function Posts() {
@@ -25,11 +26,25 @@ export default function Posts() {
             }
           });
     }, []);
+
+    const handleSort = (option) => {
+
+      let sortedPosts;
+
+      if (option === 'subreddit') {
+        sortedPosts = [...posts].sort((a, b) => a.subreddit.name.localeCompare(b.subreddit.name));
+      } else if (option === 'new') {
+        sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+      setPosts(sortedPosts);
+    };
+  
     
   
     return (
       <div className="feed-section">
         <h4>feed</h4>
+        <SortPostsBy onSort={handleSort} />
         <div className="posts-list">
             {posts.map((post) => (
                 <div key={post.id} className="post-item">
@@ -40,40 +55,5 @@ export default function Posts() {
       </div>
     );
 }
-
-
-
-// export default async function Posts( { params }) {
-
-//     const { postId } = params;
-
-//     const post = await prisma.post.findFirst({
-//         where: { id: postId },
-//         include: { subreddit: true, },
-//     });
-
-
-//     const subreddits = await prisma.post.findMany({ where: { postId } });
-
-
-//     console.log(post);
-
-
-
-//     return (
-//         <div className="feed-section">
-
-//             <h4>feed</h4>
-//                 <div className="posts-list">
-//                     {post.map((post) => (
-
-//                         <div key={post.id} className="post-item">
-//                             <Feed />
-//                         </div>
-//                     ))}        
-//                 </div>
-//         </div>
-//     );
-// }
 
 

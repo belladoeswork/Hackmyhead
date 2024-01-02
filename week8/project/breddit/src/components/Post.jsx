@@ -6,6 +6,7 @@ import { faRedditAlien } from '@fortawesome/free-brands-svg-icons';
 import { faCircleUser, faComment  } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faShare, faEllipsisH, faLongArrowAltUp, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import JoinSub from '@/components/JoinSub.jsx'; 
 
 import { formatDistanceToNow } from 'date-fns';
 
@@ -25,8 +26,10 @@ function formatTimeAgo(date) {
         return diffInDays + ' day' + (diffInDays > 1 ? "s" : "") + " ago ";
     } else if (diffInHours >= 1) {
         return diffInHours + " hr. ago";
+    } else if (diffInMinutes <= 1) {
+        return diffInMinutes + " min." + " ago ";
     } else {
-        return diffInMinutes + " min." + (diffInMinutes > 1 ? "s" : "") + " ago ";
+        return diffInMinutes + " mins ago ";
     }
 }
 
@@ -43,7 +46,11 @@ export default function Post({ post }) {
                         <p className="post-info">· {formatTimeAgo(new Date(post.createAt))} </p>
                     </div>
                     <div className="right-header">
-                        <button className="post-bttn">Join</button>
+                        {/* <button className="post-bttn">Join</button>
+                        <div className="icon-wrapper">
+                            <FontAwesomeIcon icon={faEllipsisH} />
+                        </div> */}
+                        <JoinSub className="post-bttn" subredditId={post.subreddit?.id} />
                         <div className="icon-wrapper">
                             <FontAwesomeIcon icon={faEllipsisH} />
                         </div>
@@ -61,7 +68,8 @@ export default function Post({ post }) {
                         </div> 
                     </div>
                     <div className="post-comments">
-                        <FontAwesomeIcon icon={faComment}/> 
+                        <FontAwesomeIcon icon={faComment}/>
+                        {/* <NewComment post={post} />  */}
                     </div>
                     <div className="post-share">
                         <FontAwesomeIcon icon={faShare}/>  Share 

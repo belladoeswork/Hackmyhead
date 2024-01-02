@@ -46,7 +46,8 @@ model Post {
   parent Post? @relation("parentChildRelation", fields: [parentId], references: [id], onDelete: Cascade)
   subreddit Subreddit @relation(fields: [subredditId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  comments Comment[]
+  
 }
 
 model Subreddit { 
@@ -70,4 +71,12 @@ model Subscription {
   subredditId String
 
   @@id([userId, subredditId])
+}
+
+model Comment {
+  id String @id @default(uuid())
+  postId String 
+  text String
+  posts Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createAt DateTime @default(now())
 }
