@@ -7,6 +7,8 @@ import { faCircleUser, faComment  } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faShare, faEllipsisH, faLongArrowAltUp, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import JoinSub from '@/components/JoinSub.jsx'; 
+import VotePost from '@/components/VotePost.jsx'; 
+
 
 import { formatDistanceToNow } from 'date-fns';
 
@@ -36,6 +38,9 @@ function formatTimeAgo(date) {
 
 export default function Post({ post }) {
 
+    // accessing comments
+    const comments = post.comments;
+
     return (
         <Link href={`/post/${post.id}`} style={{textDecoration: "none", color:"inherit" }}>
             <div className="post-container">
@@ -58,7 +63,7 @@ export default function Post({ post }) {
                 </div>
                 <h4 className="post-title">{post.title}</h4>
                 <div className="post-footer">
-                    <div className="post-votes">
+                    {/* <div className="post-votes">
                         <div className="up-votes">
                             <FontAwesomeIcon icon={faLongArrowAltUp} />
                         </div>
@@ -66,7 +71,8 @@ export default function Post({ post }) {
                         <div className="down-votes">
                             <FontAwesomeIcon icon={faLongArrowAltDown} />
                         </div> 
-                    </div>
+                    </div> */}
+                    <VotePost post={post}/>
                     <div className="post-comments">
                         <FontAwesomeIcon icon={faComment}/>
                         {/* <NewComment post={post} />  */}

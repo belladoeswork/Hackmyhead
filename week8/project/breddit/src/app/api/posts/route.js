@@ -10,10 +10,12 @@ export async function GET(request, response) {
       include: {
         subreddit: true,
         user: true,
+        votes: true,
       },
+      orderBy: {
+        createAt: 'desc',
+      }
     });
-
-    posts.sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
 
     // Fetch the parent and children for each post if they exist
     const postsWithRelations = await Promise.all(

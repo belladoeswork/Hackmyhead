@@ -13,7 +13,11 @@ export async function GET(request, response) {
         where: {
           id: postId,
         },
+        include: {
+            comments: true,
+        },
     });
+    
     if (!post) {
         return NextResponse.json({
           success: false,

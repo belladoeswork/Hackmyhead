@@ -67,7 +67,6 @@ export default async function Subreddit({ params }) {
 
 
 // join sub
-
 export async function POST(request, response) {
   const { userId } = request.body;
   const { subredditId } = request.params;

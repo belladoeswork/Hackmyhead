@@ -1,86 +1,154 @@
-// import { prisma } from "@/lib/prisma.js";
-// import { NextResponse } from "next/server.js";
+import { prisma } from "@/lib/prisma.js";
+import { NextResponse } from "next/server.js";
+import { fetchUser } from  "@/lib/fetchUser.js";
 
-// export async function PUT(request, response) {
-//   const { postId } = request.query;
+
+// // get the post
+// export async function GET(request, response) {
 
 //   try {
+//     const { postId } = request.query;
+
 //     const post = await prisma.post.findUnique({
-//       where: { id: postId },
-//       include: {
-//         subreddit: true,
-//         user: true,
-//         parent: true,
-//         children: {
-//           include: {
-//             user: true,
-//             subreddit: true,
+//         where: { id: postId },
+//         include: {
+//           subreddit: true,
+//           user: true,
+//           comments: {
+//             include: {
+//               user: true,
+//             },
 //           },
 //         },
-//       },
 //     });
 
 //     if (!post) {
-//       return NextResponse.json({ success: false, error: 'Post not found' });
+//         return NextResponse.json({ success: false, error: "Post not found" });
 //     }
+    
 
 //     return NextResponse.json({ success: true, post });
+
 //   } catch (error) {
+
+//     console.error('Error fetching post:', error);
+
 //     return NextResponse.json({ success: false, error: error.message });
 //   }
 // }
 
 
-import { prisma } from "@/lib/prisma.js";
-import { NextResponse } from "next/server.js";
-import { fetchUser } from  "@/lib/fetchUser.js";
 
-export default async function handler(request, response) {
-  const { postId } = request.query;
+// // create new comment
+// export async function POST(request, response) {
+  
+//   try {
+//     const { postId, text } = await request.json();
 
-  if (request.method === 'GET') {
-    try {
-      const post = await prisma.post.findUnique({
-        where: { id: postId },
-        include: {
-          subreddit: true,
-          user: true,
+//     const user = await fetchUser();
+
+//     //no text provided?
+
+//     if (!text) {
+//       return NextResponse.json({
+//         success: false,
+//         error: "Please add some text.",
+//       });
+//     }
+
+//     const newComment = await prisma.comment.create({ data: { userId: user.id, text, postId} });
+
+//     return NextResponse.json({ success: true, newComment });
+
+//   } catch (error) {
+
+//     return (
+
+//         NextResponse.json({ success: false, error: error.message })
+//     );
+//   }
+// }
+
+
+
+
+
+
+//update post
+export async function PUT(request, response) {
+  try {
+    const { postId } = response.params;
+
+    const { text } = await request.json();
+
+    const post = await prisma.post.findFirst({
+      where: { id: postId },
+      include: {
+        subreddit: true,
+        user: true,
+        comments: {
+            include: {
+                user: true,
+            },
         },
+        votes: true,
+      },
+    });
+
+    if (!post) {
+      return NextResponse.json({
+        success: false,
+        message: "No post with that ID found.",
       });
-
-      if (!post) {
-        return response.status(404).json({ success: false, error: 'Post not found' });
-      }
-
-      return response.json({ success: true, post });
-    } catch (error) {
-      return response.status(500).json({ success: false, error: error.message });
     }
+
+    const updatedposttext = await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: { message },
+    });
+    // const updatedpostvotes = await prisma.post.update({
+    //     where: {
+    //       id: postId,
+    //     },
+    //     data: { votes: {increment: 1,} },
+    // });
+    return NextResponse.json({ success: true, post: updatedposttext});
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
   }
+}
 
-  if (request.method === 'PUT') {
-    const { title, message } = request.body;
 
+//delete post
+export async function DELETE (request, response) {
     try {
-      const updatedPost = await prisma.post.update({
-        where: { id: postId },
-        data: {
-          title,
-          message
-        },
-        include: {
-          subreddit: true,
-          user: true,
-        },
-      });
+        const { postId } = response.params;
 
-      return response.json({ success: true, post: updatedPost });
-    } catch (error) {
-      return response.status(500).json({ success: false, error: error.message });
+        const post = await prisma.post.findFirst({
+            where: {
+                id: postId,
+              }
+        });
+
+        if (!post) {
+            return NextResponse.json({
+              success: false,
+              message: "No post with that ID found.",
+            });
+          }
+      
+        const deletedpost = await prisma.post.delete({
+            where: {
+              id: postId,
+            }
+          });
+
+        return NextResponse.json({ success: true, post: deletedpost });
+
+    } catch (error){
+        return NextResponse.json({ success: false, error: error.message });
+
     }
-  }
-
-  // Handle any other HTTP method
-  response.setHeader('Allow', ['GET', 'PUT']);
-  response.status(405).end(`Method ${request.method} Not Allowed`);
 }
