@@ -23,7 +23,7 @@ export async function POST(request, response) {
         error: "You must provide a text to create a post.",
       });
     }
-    const post = await prisma.post.create({ data: { text, likes: 0, createAt } });
+    const post = await prisma.post.create({ data: { text, likes, createAt } });
     return NextResponse.json({ success: true, post });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });

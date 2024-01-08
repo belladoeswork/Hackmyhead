@@ -13,16 +13,14 @@ export async function GET() {
 
 
 //update likes
-export async function PUT(request, response) {
+  export async function POST(request, response) {
+
   try {
     const { postId } = response.params;
-
-    // const { likes } = await request.json();
 
     const post = await prisma.post.findFirst({
       where: { id: postId },
     });
-    console.log(post.likes)
 
     if (!post) {
       return NextResponse.json({

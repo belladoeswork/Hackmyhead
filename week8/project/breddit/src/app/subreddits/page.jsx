@@ -44,14 +44,15 @@ export default async function Subreddits() {
               style={{ textDecoration: "none" }}
             >
               <span className="subreddit-name"> r/{subreddit.name} </span>
-              <p>{subreddit.subscribers.length} subscribers</p>
+              <p>{subreddit.subscribers.length} members</p>
             </Link>
 
             <Link
               href={`/subreddits/${subreddit.id}`}
               style={{ textDecoration: "none" }}
             >
-              <JoinSub className="join-bttn" subredditId={subreddit.id} />
+                    {/* <JoinSub className="join-bttn" subredditId={subreddit.id} /> */}
+                    <JoinSub className="join-bttn" subredditId={subreddit.id} />
             </Link>
           </div>
         ))}

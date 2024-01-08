@@ -17,11 +17,22 @@ export default function race() {
       };
 
       useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
+        // window.addEventListener('keydown', handleKeyDown);
     
+        // return () => {
+        //   window.removeEventListener('keydown', handleKeyDown);
+        // };
+        const carDiv = document.getElementById('carDiv');
+
+        if (carDiv) {
+          carDiv.addEventListener('keydown', handleKeyDown);
+        }
         return () => {
-          window.removeEventListener('keydown', handleKeyDown);
+          if (carDiv) {
+            carDiv.removeEventListener('keydown', handleKeyDown);
+          }
         };
+
     }, []);
     
     return (

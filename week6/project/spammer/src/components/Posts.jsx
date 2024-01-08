@@ -1,22 +1,26 @@
-import { API } from "@/lib/api.js";
 import Post from "./Post.jsx";
-import EditPost from "./EditPost.jsx";
+import { prisma } from "@/lib/prisma.js";
 
 
 export default async function Posts() {
-  const res = await fetch(`${API}/api/posts`, { cache: "no-store" });
-  const info = await res.json();
-  console.log(info.posts);
+
+  const posts = await prisma.post.findMany({
+    orderBy: {
+      createAt: "desc",
+    },
+  });
+
   return (
     <div id="posts-container">
-      {info.posts.map((post) => {
+      {posts.map((post) => {
         return (
             <div>
-                <Post key={post.id} post={post} />
-                
+                <Post key={post.id} post={post} />           
             </div>
         );
       })}
     </div>
   );
 }
+
+

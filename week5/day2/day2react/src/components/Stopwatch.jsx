@@ -1,5 +1,3 @@
-
-import Divider from '@/components/Divider.jsx';
 import { useState, useRef } from 'react';
 
 
@@ -38,16 +36,13 @@ export default function stopWatch() {
         <div>
             <h2>Stopwatch</h2>
             <div className="stopwatch" >
-                
-                <p className='timer'>{time} Seconds</p>
-                <button className='start' onClick={() => startClick ()}>Start</button>
-                <button className='stop' onClick={() => stopClick ()}>Stop</button>
-                <button className='clear' onClick={() => resetClick ()}>Clear</button>
-           
+                <div className='bttns'>
+                    <p className='timer'>{time} Seconds</p>
+                    <button className='start' onClick={() => startClick ()}>Start</button>
+                    <button className='stop' onClick={() => stopClick ()}>Stop</button>
+                    <button className='clear' onClick={() => resetClick ()}>Clear</button>
+                </div>
             </div>
-
-            <Divider />
-
         </div>
     );
 }

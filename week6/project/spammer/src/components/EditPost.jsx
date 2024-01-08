@@ -1,6 +1,5 @@
 "use client"
 
-import { API } from "@/lib/api.js";
 import { useRouter } from "next/navigation.js";
 import { useState, useEffect, useRef } from "react";
 
@@ -35,7 +34,7 @@ export default function EditPost({ post }) {
     const saveEdit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch(`${API}/api/posts/${post.id}`, {
+        const response = await fetch(`/api/posts/${post.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

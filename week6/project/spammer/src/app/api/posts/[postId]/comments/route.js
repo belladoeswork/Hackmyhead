@@ -5,7 +5,7 @@ import { NextResponse } from "next/server.js";
 
 //get comments
 export async function GET(request, response) {
-    try{
+  try{
 
     const { postId } = response.params;
 

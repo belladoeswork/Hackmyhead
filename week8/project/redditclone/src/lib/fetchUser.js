@@ -19,15 +19,19 @@ export async function fetchUser() {
           // token valid?
         const { userId } = jwt.verify(userCookie.value, process.env.JWT_SECRET);
 
-
+        // get user
         const user = await prisma.users.findFirst({ where: { id: userId } });
 
-        delete user.password;
+        if (user) {
 
-        return user;
+            delete user.password;
+        }
+        return user || {};
 
     } catch (error) {
+
         console.log("Error fetching user:", error);
+
         return {};
     }
 

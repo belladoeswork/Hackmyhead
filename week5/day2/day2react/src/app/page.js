@@ -4,12 +4,12 @@ import styles from './page.module.css';
 import Divider from '@/components/Divider.jsx';
 import Box from '@/components/Box.jsx';
 import Mirror from '@/components/Mirror.jsx';
+// import Test from '@/components/Test.jsx';
+
 import Counter from '@/components/Counter.jsx';
 import Race from '@/components/Race.jsx';
 import Stopwatch from '@/components/Stopwatch.jsx';
 
-
-import { useState } from "react";
 
 export default function Home() {
 
@@ -21,7 +21,7 @@ export default function Home() {
       <Mirror />
       <Counter />
       <Race />
-      <Stopwatch />  
+      <Stopwatch />
     </main>
   )
 }

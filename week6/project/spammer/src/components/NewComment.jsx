@@ -1,6 +1,5 @@
 "use client"
 
-import { API } from "@/lib/api.js";
 import { useRouter } from "next/navigation.js";
 import { useState } from "react";
 
@@ -22,7 +21,7 @@ export default function NewComment({post}) {
             handleCancel();
             return;
         } 
-        const response = await fetch(`${API}/api/posts/${post.id}/comments`, {
+        const response = await fetch(`/api/posts/${post.id}/comments`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

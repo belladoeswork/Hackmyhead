@@ -20,6 +20,7 @@ export default async function Subreddit({ params }) {
 
   const subreddit = await prisma.subreddit.findFirst({
     where: { id: subredditId },
+    include: { subscribers: true },
   });
 
   const posts = await prisma.post.findMany({

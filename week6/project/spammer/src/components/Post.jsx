@@ -6,14 +6,12 @@ import NewComment from "./NewComment.jsx";
 
 
 
-
 export default function Post({ post }){
 
     return (
         <div>
             <div className="post-containers" key={post.id}>
-                <div className="post-text">{post.text}</div>
-                
+                <div className="post-text">{post.text}</div>  
                 
                 <div className="post-buttons-containers">    
                     <LikePost post={post} />

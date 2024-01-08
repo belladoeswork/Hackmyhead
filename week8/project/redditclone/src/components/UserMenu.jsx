@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Login from "@/app/login/page";
-// import Logout from "@/components/Logout.jsx";
 import Logout from "./Logout.jsx";
 import { fetchUser } from  "@/lib/fetchUser.js";
 
@@ -14,13 +13,15 @@ import { fetchUser } from  "@/lib/fetchUser.js";
 
 
 
-export default function UserMenu({ userUpdated, toggleUserUpdate }) {
+
+export default function UserMenu({ userUpdated, registeredUsername, setUserUpdated }) {
 
     const [isPopupOpen, setPopupOpen] = useState(false);
     const iconButtonRef = useRef(null);
     const popupRef = useRef(null);
     const [user, setUser] = useState(null);
     const [isLoading, setLoading] = useState(true);
+
 
   
     const openPopup = () => {
@@ -56,10 +57,16 @@ export default function UserMenu({ userUpdated, toggleUserUpdate }) {
         closePopup();
       };
   
-      document.querySelector('.navbar').addEventListener('click', handleNavbarClick);
+      // document.querySelector('.navbar').addEventListener('click', handleNavbarClick);
   
+      // return () => {
+      //   document.querySelector('.navbar').removeEventListener('click', handleNavbarClick);
+      // };
+      const navbar = document.querySelector('.navbar');
+      navbar.addEventListener('click', handleNavbarClick);
+
       return () => {
-        document.querySelector('.navbar').removeEventListener('click', handleNavbarClick);
+        navbar.removeEventListener('click', handleNavbarClick);
       };
     }, []);
 
@@ -67,9 +74,12 @@ export default function UserMenu({ userUpdated, toggleUserUpdate }) {
     useEffect(() => {
       const getUser = async () => {
         try {
+      
           const userData = await fetchUser();
           setUser(userData);
+
         } catch (error) {
+
           console.error('Error fetching user data:', error);
         }
   
@@ -78,7 +88,26 @@ export default function UserMenu({ userUpdated, toggleUserUpdate }) {
       };
   
       getUser();
-    }, []);
+    }, [userUpdated]);
+
+
+    useEffect(() => {
+    }, [userUpdated, registeredUsername]);
+
+
+  //   const handleLogout = async (username) => {
+  //     setUserUpdated(false);
+  //     console.log(`User ${username} logged out`);
+  // };
+
+
+  const handleLogout = () => {
+    setUser(null);
+    setUserUpdated(false);
+    console.log("User logged out");
+  };
+
+  
 
   return (
     <div className="menu">
@@ -108,20 +137,9 @@ export default function UserMenu({ userUpdated, toggleUserUpdate }) {
                 {user.id && (
                   <div>
                     <p>Welcome, {user.username}!</p>
-                    <Link href="/" >
-                      <button className="bttn" style={{ textDecoration: 'none' }} >
-                        <Logout />
-                      </button>
-                    </Link>
-                  </div>
-                )}
-                {!user.id && (
-                  <div>
-                    <Link href="/login" style={{ textDecoration: 'none' }}>
-                      <button className="bttn" onClick={handleLoginButtonClick} >
-                        Login / Register
-                      </button>
-                    </Link> 
+                    <button className="bttn" style={{ textDecoration: 'none' }} >
+                      <Logout onLogout={handleLogout}/>
+                    </button>
                   </div>
                 )}
               </div>

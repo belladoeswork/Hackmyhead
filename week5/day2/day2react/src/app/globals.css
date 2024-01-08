@@ -24,9 +24,8 @@
 
 .stopwatch {
   display: flex;
-  gap: 10px;
-  align-items: center;
-  
+  flex-direction: column;
+  gap: 10px;  
 }
 
 .timer {
@@ -36,9 +35,18 @@
   font-size: 20px;
   font-weight: 600;
 }
+  
+.timer {
+  color: green;
+  font-size: 20px;
+  font-weight: 600;
+}
+  
 
+  
 .start, .stop, .clear {
   height: 25px;
   border: 1px solid black;
   border-radius: 6%;
+  margin-right: 5px;
 }

@@ -41,7 +41,7 @@ export async function POST(request, response) {
       data: { username, password: hashedPassword },
     });
 
-    console.log(newUser);
+    // console.log(newUser);
 
     if (!newUser) {
       return NextResponse.json({

@@ -1,14 +1,20 @@
-import { API } from "@/lib/api.js";
+import { prisma } from "@/lib/prisma.js";
 import Comment from "./Comment.jsx";
 
 export default async function Comments({ post }) {
-        
-    const res = await fetch(`${API}/api/posts/${post.id}/comments`, { cache: "no-store" });
-    const info = await res.json();
+
+    const comments = await prisma.comment.findMany( {
+      where: {
+        postId: post.id,
+      },
+      orderBy: {
+        createAt: "desc",
+      },
+  });
 
     return (
         <div className="comment-container">
-          {info.comments.map((comment, index) => {
+          {comments.map((comment, index) => {
             return <Comment key={comment.id} comment={comment} index={index} />;
           })}
         </div>

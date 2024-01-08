@@ -29,7 +29,7 @@ export async function PUT(request, response) {
         where: {
           id: postId,
         },
-        data: { likes: like+1 },
+        data: { likes: {increment: 1,} },
     });
     return NextResponse.json({ success: true, post: updatedposttext});
   } catch (error) {
