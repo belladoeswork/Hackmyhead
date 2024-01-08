@@ -19,7 +19,7 @@ export async function POST(request, response) {
   
   try {
     const { name } = await request.json();
-    const { userId, subredditId } = request.json();
+    // const { userId, subredditId } = request.json();
 
     const user = await fetchUser();
 
@@ -29,6 +29,14 @@ export async function POST(request, response) {
       return NextResponse.json({
         success: false,
         error: "Please give your community a name.",
+      });
+    }
+
+    // no user?
+    if (!user) {
+      return NextResponse.json({
+        success: false,
+        error: "Please login.",
       });
     }
 
@@ -43,10 +51,7 @@ export async function POST(request, response) {
     }
 
 
-    const sub = await prisma.subreddit.create({ data: { name, creatorId: user.id} });
-
-    // // Subscribe the creator to the sub
-    // await prisma.subscription.create({ data: { userId: user.id, subredditId: sub.id } });
+    const sub = await prisma.subreddit.create({ data: { name, userId: user.id} });
 
     return NextResponse.json({ success: true, sub });
 

@@ -1,86 +1,71 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation.js";
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faComment  } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser, faComment } from "@fortawesome/free-regular-svg-icons";
 
-
-export default function NewComment({post}) {
-
-  const [comment, setCommentText] = useState("");
+export default function NewComment({ post, user, subredditId }) {
+  const [commentText, setCommentText] = useState("");
+  const [error, setError] = useState("");
 
   const [showInput, setShowInput] = useState(false);
 
   const router = useRouter();
 
-
   async function submitComment(event) {
+    event.preventDefault();
 
-        event.preventDefault();
-
-        if (comment === "") {
-            handleCancel();
-            return;
-        } 
-        const response = await fetch(`/api/posts/${post.id}/comments`, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-            text: comment,
-            }),
-        });
-
-        const info = await response.json();
-            setCommentText("");
-            setShowInput(false);
-            router.refresh();
+    if (!user) {
+      return setError("Please login!");
     }
 
-    function handleInputChanges(event) {
-        setCommentText(event.target.value);
-        
-    }
+    if (commentText) {
+      const response = await fetch("/api/comments/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: commentText,
+          subredditId,
+          parentId: post.id,
+        }),
+      });
 
-    function toggleInput() {
-        if (showInput) {
-            return;
-        }
-        setShowInput(!showInput);
-    }
+      const info = await response.json();
 
-    const handleCancel = () => {
-        setShowInput(false);
+      if (info.success) {
         setCommentText("");
-    };
+        setShowInput(false);
+        router.refresh();
+      } else {
+        setError(info.error);
+      }
+    }
+  }
 
- 
-
-    return (
-        <div>
-            <div className="post-comments">
-                <FontAwesomeIcon icon={faComment}/>
-            </div>  
-            <div className="new-comment-container" >
-            <p className="comment-bttn" onClick={toggleInput}>💬</p>
-            {showInput && (
-                <form className="comment-form" onSubmit={submitComment}>
-                    <input
-                        className="comment-input"
-                        type="text"
-                        value={comment}
-                        onChange={handleInputChanges}
-                    />
-                    <div className="comment-buttons">
-                        <button type="submit">Submit</button>
-                        <button onClick={handleCancel}>Cancel</button>
-                    </div>
-                </form>
-            )}
-            </div>
+  return (
+    <div>
+      <form className="comment-form" onSubmit={submitComment}>
+        <p> Reply as u/{user.username}</p>
+        <textarea
+          className="comment-input"
+          placeholder="What are your thoughts?"
+          type="text"
+          value={commentText}
+          onChange={(e) => {
+            setCommentText(e.target.value);
+          }}
+        ></textarea>
+        {error && <p>{error}</p>}
+        <div className="comment-buttons">
+          <button type="submit" className="join-bttn">
+            {" "}
+            Post Comment
+          </button>
         </div>
-    );
+      </form>
+    </div>
+  );
 }
-

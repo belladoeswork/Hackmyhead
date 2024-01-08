@@ -1,26 +1,24 @@
 "use client";
 
-
 import { useRouter } from "next/navigation.js";
-import { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faImage } from '@fortawesome/free-regular-svg-icons';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser, faImage } from "@fortawesome/free-regular-svg-icons";
 
-export default function CreatePost({ subreddit }) {
+export default function CreatePost({ subreddit, post, postId }) {
   const [subreddits, setSubreddits] = useState([]);
   const [selectedSub, setSelectedSub] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [isPosting, setIsPosting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const router = useRouter();
 
   async function fetchSubs() {
     try {
-
       const response = await fetch("/api/subreddits");
 
       if (!response.ok) {
@@ -29,10 +27,8 @@ export default function CreatePost({ subreddit }) {
 
       const info = await response.json();
       setSubreddits(info.subreddits);
-
-
-    } catch(error) {
-      console.error("Error fetching subreddits:", error)
+    } catch (error) {
+      console.error("Error fetching subreddits:", error);
     }
   }
 
@@ -40,22 +36,26 @@ export default function CreatePost({ subreddit }) {
     e.preventDefault();
 
     if (!selectedSub || !title || !message) {
-      return setError("Please enter a message to create a post");
+      return setError("Please enter all information to create a post");
     }
 
     const response = await fetch("/api/posts", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ subredditId: selectedSub, title, message })
+      body: JSON.stringify({ subredditId: selectedSub, title, message }),
     });
+
+    console.log({ subredditId: selectedSub, title, message });
 
     const info = await response.json();
 
     if (info.error) {
       return setError(info.error);
     }
+
+    console.log(info);
 
     setSelectedSub("");
     setTitle("");
@@ -64,14 +64,15 @@ export default function CreatePost({ subreddit }) {
     setIsPopupOpen(false);
 
     if (subreddit) {
-      router.push(`/subreddits/${subreddit.id}`);
+      router.push(`/subreddits/${selectedSub}`);
     } else {
       router.push("/");
     }
 
     // router.refresh();
 
-    window.location.reload();
+    setIsPopupOpen(false);
+    router.refresh();
   }
 
   useEffect(() => {
@@ -86,10 +87,14 @@ export default function CreatePost({ subreddit }) {
 
   return (
     <div className="create-container">
-      {!isPosting ? (
+      {!isPosting && !isPopupOpen ? (
         <div className="elements">
           <FontAwesomeIcon icon={faCircleUser} className="profile" />
-          <input placeholder="Create Post" className="content-text" onClick={() => setIsPopupOpen(true)} />
+          <input
+            placeholder="Create Post"
+            className="content-text"
+            onClick={() => setIsPopupOpen(true)}
+          />
           <FontAwesomeIcon icon={faImage} className="image-icon" />
         </div>
       ) : null}
@@ -99,24 +104,45 @@ export default function CreatePost({ subreddit }) {
           <div className="popup-inner2">
             <h2>Create Post</h2>
             <form onSubmit={handleCreate}>
-              {!subreddit && (
-                <div className="select-sub" >
-                  <select value={selectedSub} onChange={(e) => setSelectedSub(e.target.value)}>
-                    <option value="" disabled>Choose a community</option>
-                    {subreddits.map(sub => (
-                      <option key={sub.id} value={sub.id}>{sub.name}</option>
-                    ))}
-                  </select>
-                </div>
-              )}
+              <div className="select-sub">
+                <select
+                  value={selectedSub}
+                  onChange={(e) => setSelectedSub(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Choose a community
+                  </option>
+                  {subreddits.map((sub) => (
+                    <option key={sub.id} value={sub.id}>
+                      r/{sub.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <label>Title</label>
-              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               <label>Text</label>
-              <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
               {error && <p>{error}</p>}
-              <button className="bttn" type="submit">Create Post</button>
+              <button className="bttn" type="submit">
+                {" "}
+                Create Post
+              </button>
             </form>
-            <button className="close-button2" onClick={() => setIsPopupOpen(false)}>X</button>
+            <button
+              className="close-button2"
+              onClick={() => setIsPopupOpen(false)}
+            >
+              X
+            </button>
           </div>
         </div>
       )}

@@ -4,9 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-
 export async function POST(request, response) {
-  
   try {
     const cookieStore = cookies();
     const { username, password } = await request.json();
@@ -36,12 +34,7 @@ export async function POST(request, response) {
     cookieStore.set("token", token);
 
     return NextResponse.json({ success: true, user, token });
-
   } catch (error) {
-
-    return (
-
-        NextResponse.json({ success: false, error: error.message })
-    );
+    return NextResponse.json({ success: false, error: error.message });
   }
 }

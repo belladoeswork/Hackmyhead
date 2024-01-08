@@ -4,11 +4,8 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
-
-
 export async function POST(request, response) {
   try {
-
     const cookieStore = cookies();
 
     // no info to create account
@@ -51,15 +48,12 @@ export async function POST(request, response) {
     delete newUser.password;
 
     // token for new user
-    const token = jwt.sign( { userId: newUser.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET);
 
     cookieStore.set("token", token);
 
-        
     return NextResponse.json({ success: true, newUser, token });
-
   } catch (error) {
-
     console.error(error);
 
     return NextResponse.json({ success: false, error: error.message });

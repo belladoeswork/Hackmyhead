@@ -1,24 +1,19 @@
-
-"use client";
-
-import Link from "next/link";
+import Link from "next/link.js";
 import { useRouter } from "next/navigation.js";
 
-export default function Logout(props) {
+export default function Logout() {
   const router = useRouter();
 
-  return (
-    <Link
-      onClick={async () => {
-        const response = await fetch("/api/users/logout", {
-          method: "POST",
-        });
-        const info = await response.json();
+  async function handleClick() {
+    console.log("Logout component rendered");
+    await fetch("/api/users/logout", {
+      method: "POST",
+    });
+    router.refresh();
+  }
 
-        router.refresh();
-      }}
-      href={"/"}
-    >
+  return (
+    <Link style={{ textDecoration: "none" }} onClick={handleClick} href={"/"}>
       Logout
     </Link>
   );

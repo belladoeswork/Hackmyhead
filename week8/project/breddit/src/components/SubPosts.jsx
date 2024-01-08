@@ -12,7 +12,11 @@ import {
   faLongArrowAltDown,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+// import JoinSub from '@/components/JoinSub.jsx';
 import VotePost from "@/components/VotePost.jsx";
+// import Actions from '@/components/Actions.jsx';
+
+// import { fetchUser } from  "@/lib/fetchUser.js";
 
 import { formatDistanceToNow } from "date-fns";
 
@@ -37,7 +41,7 @@ export function formatTimeAgo(date) {
   }
 }
 
-export default function Post({ post, user, subreddit }) {
+export default function SubPosts({ post, user, subreddit }) {
   const votesCount = post.votes.reduce(
     (count, vote) => (vote.isUpvote ? count + 1 : count - 1),
     0
@@ -46,14 +50,14 @@ export default function Post({ post, user, subreddit }) {
 
   return (
     <Link
-      href={`subreddits/${subreddit.id}/${post.id}`}
+      href={`${subreddit.id}/${post.id}`}
       style={{ textDecoration: "none", color: "inherit" }}
     >
       <div className="post-container">
         <div className="post-header">
           <div className="left-header">
             <FontAwesomeIcon icon={faRedditAlien} size="2x" />
-            <p className="post-sub"> r/{post.subreddit?.name} </p>
+            <p className="post-sub">u/{post.user.username} </p>
             <p className="post-info">
               · {formatTimeAgo(new Date(post.createAt))}{" "}
             </p>

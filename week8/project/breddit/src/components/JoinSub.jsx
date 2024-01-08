@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation.js";
 import { useState, useEffect } from 'react'; 
 
 
-export default function JoinSub({ subredditId }) {
+export default function JoinSub({ subredditId, onJoinSub }) {
   const [user, setUser] = useState(null);
   const [subscribersCount, setSubscribersCount] = useState(""); 
 
@@ -33,9 +33,10 @@ export default function JoinSub({ subredditId }) {
     if (response.ok) {
       alert('Successfully joined subreddit!');
 
-      const countResponse = await fetch(`/api/subreddits/${subredditId}/subscribersCount`);
-      const { subscribersCount } = await countResponse.json();
-      setSubscribersCount(subscribersCount);
+      // const countResponse = await fetch(`/api/subreddits/${subredditId}/subscribersCount`);
+      // const { subscribersCount } = await countResponse.json();
+      // setSubscribersCount(subscribersCount);
+      onJoinSub(subredditId);
     } else {
       alert('Failed to join subreddit.');
     }
